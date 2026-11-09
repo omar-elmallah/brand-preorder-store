@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d98b32">
+  <title>BRAND NAME | The First Collection</title>
+  <style>
+:root{--ink:#211c1d;--wine:#651e32;--wine-light:#f0e4e7;--paper:#faf8f3;--muted:#756d6d;--line:#e4ddd6;--white:#fff;--radius:6px}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:25px}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.85 Tahoma,"Segoe UI",Arial,sans-serif}button,input,select,textarea{font:inherit}button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}button,a{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #b77a8e;outline-offset:4px}[hidden]{display:none!important}.shell{width:min(1180px,calc(100% - 72px));margin-inline:auto}.announcement{text-align:center;background:var(--wine);color:#fff;padding:8px 16px;font-size:12px;letter-spacing:.2px;min-height:38px}.site-header{height:99px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{font:bold 23px/1.1 Arial,sans-serif;letter-spacing:2px;white-space:nowrap}.site-header nav{display:flex;gap:33px;font-size:13px}.header-cta{font-size:13px;display:flex;gap:35px;align-items:center;border-bottom:1px solid var(--ink);padding-bottom:6px}.hero{display:grid;grid-template-columns:.93fr 1.07fr;gap:66px;align-items:center;padding-block:59px 66px}.hero-copy{padding-block:25px}.eyebrow{display:flex;align-items:center;gap:11px;font-size:11px;letter-spacing:1.5px;font-weight:600;color:var(--wine)}.tiny-line{width:29px;height:1px;background:var(--wine)}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(40px,4.7vw,63px);line-height:1.55;letter-spacing:-2px;margin-block:19px 20px;font-weight:700}h1 span{color:var(--wine)}.hero-copy>p{font-size:15px;max-width:390px;line-height:2.1;color:var(--muted);margin-bottom:28px}.button{border:1px solid transparent;border-radius:2px;min-height:49px;display:inline-flex;align-items:center;justify-content:space-between;gap:35px;padding:12px 24px;font-size:13px;line-height:1.6;transition:background .18s,transform .18s}.primary{background:var(--wine);color:#fff}.primary:hover{background:#4b1525}.secondary{background:transparent;border-color:var(--line);color:var(--ink)}.secondary:hover{background:#eee8df}.hero-note{display:flex;gap:8px;align-items:center;margin-top:20px;color:var(--muted);font-size:11px}.hero-note>span:first-child{font-size:19px}.hero-art{background:#eae4db;position:relative;min-height:482px;overflow:hidden;padding:22px 25px 14px;display:flex;flex-direction:column;justify-content:space-between}.hero-art:before{content:"";position:absolute;inset:18% 15% 14%;border:1px solid #d9d0c6;border-radius:50%;transform:rotate(-22deg)}.art-topline,.art-bottomline{font:10px/1.6 Arial,sans-serif;letter-spacing:2px;display:flex;justify-content:space-between;position:relative;z-index:1}.art-bottomline{font-size:9px}.art-bottomline>span:first-child{font-family:Tahoma,sans-serif;letter-spacing:0;font-size:12px}.hero-art svg{width:100%;display:block;margin:-4px auto -15px;position:relative;z-index:1}.art-disclaimer{text-align:center;font-size:10px;color:#786e65;margin:13px 0 0}.detail-strip{border-block:1px solid var(--line);font-size:12px;color:var(--muted)}.detail-strip>.shell{display:flex;justify-content:space-between;padding-block:18px}.detail-strip span+span{border-inline-start:1px solid var(--line);padding-inline-start:45px}.product-section{padding-block:72px;display:grid;grid-template-columns:1.05fr .95fr;gap:80px}.product-section h2,.section-heading h2,.size-section h2,.policies-section h2{font-size:30px;letter-spacing:-.6px;line-height:1.6;margin-block:12px 17px}.section-lead{color:var(--muted);line-height:2.1;max-width:540px}.product-facts{display:flex;gap:70px;margin-top:25px;font-size:13px}.product-facts p{margin-bottom:0}.muted{color:var(--muted)}.product-aside{border-inline-start:1px solid var(--line);padding-inline-start:40px}.product-aside h3{font-size:22px;margin-block:10px}.product-aside>p{font-size:13px;color:var(--muted)}.timing{display:grid;grid-template-columns:1fr 1.1fr;gap:9px 15px;font-size:12px;margin-top:20px}.timing>span{color:var(--muted)}.timing strong{font-weight:500}.product-gallery{grid-column:1/-1;display:flex;overflow-x:auto;gap:15px}.product-gallery figure{flex:0 0 min(320px,80vw);margin:0}.product-gallery img{display:block;width:100%;aspect-ratio:1/1.1;object-fit:cover;background:#eae4db}.product-gallery figcaption{font-size:11px;color:var(--muted);padding-top:8px}.order-section{padding-block:61px 70px;border-top:1px solid var(--line)}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:25px}.section-heading h2{margin-bottom:0}.section-heading>p{color:var(--muted);font-size:12px;margin-bottom:8px}.checkout-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:26px;align-items:start}fieldset{border:0;padding:0;margin:0;min-width:0}.checkout-main{display:grid;gap:22px}.form-card{border:1px solid var(--line);background:#fffdf9;padding:27px;border-radius:var(--radius)}.card-heading{display:flex;align-items:center;gap:12px;margin-bottom:20px}.card-heading h3{margin:0;font-size:17px}.step-number{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--line);font-size:12px;border-radius:50%}.field-label{font-size:12px;display:block;margin-bottom:11px}.field-label .muted{margin-inline-start:8px}.color-options{display:flex;gap:12px;margin-bottom:22px}.color-button{display:flex;gap:8px;align-items:center;background:transparent;border:1px solid var(--line);padding:9px 14px;border-radius:3px;font-size:12px;min-height:43px}.color-button[aria-pressed=true]{border-color:var(--wine);background:#f6eef0;box-shadow:0 0 0 1px var(--wine)}.color-dot{display:block;width:17px;height:17px;border-radius:50%;border:1px solid #0002}.size-label{display:flex;justify-content:space-between;gap:16px;align-items:baseline}.size-label>a{font-size:10px;text-decoration:underline;text-underline-offset:4px;color:var(--muted)}.size-options{display:flex;gap:9px;flex-wrap:wrap}.size-button{min-width:48px;min-height:42px;background:transparent;border:1px solid var(--line);border-radius:2px;font-size:12px}.size-button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}.size-button:disabled{text-decoration:line-through}.field-help{font-size:11px;line-height:1.9;color:var(--muted)}#selectionStatus{min-height:20px;margin-block:7px 17px}.quantity-control{display:inline-flex;direction:ltr;border:1px solid var(--line);border-radius:3px;overflow:hidden;height:40px}.quantity-control button{border:0;background:transparent;width:39px;font-size:18px}.quantity-control input{border:0;width:45px;text-align:center;padding:3px;background:transparent;-moz-appearance:textfield}.quantity-control input::-webkit-inner-spin-button,.quantity-control input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 15px;margin-top:23px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field>label{font-size:12px}.field input,.field select,.field textarea{width:100%;background:#fff;border:1px solid var(--line);border-radius:3px;padding:11px 12px;font-size:12px;color:var(--ink);min-height:45px}.field textarea{resize:vertical}.field input::placeholder,.field textarea::placeholder{color:#a19894;font-size:11px}.field select{appearance:auto}.field input:invalid:not(:placeholder-shown),.field textarea:invalid:not(:placeholder-shown){border-color:#b898a1}.span-full{grid-column:1/-1}.order-summary{position:sticky;top:20px}.order-summary>h3{font-size:23px;margin-block:9px 24px}.summary-product{display:flex;gap:13px;align-items:center;margin-bottom:25px;padding-bottom:23px;border-bottom:1px solid var(--line)}.summary-product strong{font-size:13px;display:block}.summary-product span{font-size:11px;display:block;margin-top:3px}.mini-swatch{width:49px;height:58px;background:var(--wine);border-radius:3px;position:relative;flex:none}.mini-swatch:after{content:"";position:absolute;width:25px;height:33px;top:12px;right:12px;background:#fff2;border-radius:5px}.summary-lines{margin:0}.summary-lines>div{display:flex;justify-content:space-between;gap:10px;font-size:12px;margin-bottom:14px}.summary-lines dd{margin:0;direction:rtl;font-weight:600}.summary-lines dt{color:var(--muted)}.summary-lines .summary-total{padding-top:17px;margin-top:20px;border-top:1px solid var(--line);font-size:17px}.summary-total dt{color:var(--ink);font-weight:bold}.summary-preorder{background:#f3ede6;padding:13px 15px;margin-block:22px 17px;font-size:11px}.summary-preorder strong{font-size:12px}.summary-preorder p{margin-block:5px 0;line-height:1.9;color:#665a57}.full-width{width:100%;margin-top:15px}.notice{background:#f3ede6;border:1px solid #e1d0c5;padding:16px 19px;font-size:12px;border-radius:3px;margin-block:20px;white-space:pre-line}.notice.error{background:#fbefef;border-color:#eac6c6;color:#782c37}.notice p{margin:0 0 12px}.retry-actions{display:flex;gap:12px;flex-wrap:wrap;margin-block:15px}.honeypot{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.success-panel{text-align:center;background:#fffdf9;border:1px solid var(--line);padding:50px 25px;border-radius:6px}.success-panel .eyebrow{justify-content:center}.success-icon{display:flex;justify-content:center;align-items:center;background:#ede8dc;color:#45634c;font-size:28px;border-radius:50%;width:58px;height:58px;margin:0 auto 23px}.success-panel h2{font-size:32px;margin-block:13px}.success-panel>p{max-width:500px;margin-inline:auto}.order-number{background:#f3ede6;padding:13px;display:flex;gap:15px;align-items:center;justify-content:center;flex-wrap:wrap}.order-number span{font-size:11px;color:var(--muted)}.order-number strong{font-family:monospace;font-size:15px;word-break:break-all}.size-section{border-top:1px solid var(--line);padding-block:60px;display:grid;grid-template-columns:.8fr 1.2fr;gap:55px;align-items:start}.size-section h2{font-size:26px}.size-section p{font-size:12px}.table-scroll{overflow:auto;max-width:100%}table{width:100%;border-collapse:collapse;white-space:nowrap;text-align:right;font-size:12px}th,td{padding:13px 12px;border-bottom:1px solid var(--line)}th{font-weight:500;background:#eee8df;color:#6a5d56}td:first-child{font-family:Arial,sans-serif;font-weight:600}.policies-section{border-top:1px solid var(--line);padding-block:60px 55px}.policy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}.policy-grid details{border-block:1px solid var(--line);padding:17px 0}.policy-grid summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;font-size:13px}.policy-grid summary::-webkit-details-marker{display:none}.policy-grid summary span{font:20px Arial,sans-serif;color:var(--muted)}.policy-grid details[open] summary span{transform:rotate(45deg)}.policy-grid details>p{font-size:12px;color:var(--muted);margin:17px 0 0;white-space:pre-line}.contact-row{display:flex;gap:25px;align-items:center;justify-content:space-between;font-size:12px;margin-top:35px}.contact-row a{text-decoration:underline;text-underline-offset:4px;margin-inline-start:20px}.site-footer{background:var(--ink);color:var(--paper);padding-block:35px}.site-footer>.shell{display:flex;align-items:center;justify-content:space-between;gap:25px}.site-footer .brand{font-size:19px}.site-footer span,.site-footer a:last-child{font-size:11px;color:#bdb1b0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}@media(min-width:1450px){.hero-art{min-height:520px}}@media(max-width:1000px){.shell{width:calc(100% - 46px)}.hero{gap:30px}.hero-art{min-height:410px;padding:18px}.hero-copy h1{font-size:43px}.product-section{gap:35px}.checkout-grid{grid-template-columns:1.2fr 1fr;gap:18px}.form-card{padding:22px}.fields-grid{grid-template-columns:1fr}.field{grid-column:auto}.span-full{grid-column:auto}.summary-lines .summary-total{font-size:15px}.size-section{gap:30px;grid-template-columns:1fr 1.3fr}.detail-strip span+span{padding-inline-start:20px}}@media(max-width:720px){.shell{width:calc(100% - 36px)}.announcement{font-size:10px;padding-block:9px;line-height:1.7}.site-header{height:77px}.brand{font-size:19px;letter-spacing:1.6px}.site-header nav{display:none}.header-cta{font-size:11px;gap:15px}.hero{display:flex;flex-direction:column;gap:23px;padding-block:27px 33px}.hero-copy{padding:7px 0 0;width:100%}.eyebrow{font-size:10px}.hero-copy h1{font-size:43px;line-height:1.5;margin-block:15px}.hero-copy>p{font-size:13px;max-width:350px;margin-bottom:20px}.hero-copy .button{min-width:177px}.hero-note{font-size:10px;margin-top:14px}.hero-art{width:100%;min-height:0;aspect-ratio:1/1.06;padding:17px 20px 12px}.hero-art svg{width:100%;max-height:340px;margin:-7px 0 -17px}.art-disclaimer{font-size:9px;margin-top:11px}.art-topline,.art-bottomline{font-size:8px}.detail-strip>.shell{font-size:9px;gap:10px;padding-block:14px;justify-content:center;flex-wrap:wrap}.detail-strip span+span{padding-inline-start:12px}.detail-strip span:last-child{display:none}.product-section{padding-block:38px;grid-template-columns:1fr;gap:29px}.product-section h2,.section-heading h2,.policies-section h2{font-size:26px;margin-block:10px 12px}.section-lead{font-size:13px}.product-facts{gap:60px;margin-top:20px;font-size:12px}.product-aside{border-inline-start:0;border-top:1px solid var(--line);padding-inline-start:0;padding-top:23px}.product-aside h3{font-size:20px}.timing{font-size:11px;grid-template-columns:1fr 1fr}.order-section{padding-block:35px 40px}.section-heading{display:block;margin-bottom:23px}.section-heading>p{font-size:11px;margin-top:10px}.checkout-grid{grid-template-columns:1fr;gap:18px}.checkout-main{gap:18px}.form-card{padding:20px}.card-heading{margin-bottom:17px}.card-heading h3{font-size:16px}.fields-grid{grid-template-columns:1fr 1fr;gap:16px 12px}.span-full{grid-column:1/-1}.field>label,.field input,.field select,.field textarea{font-size:11px}.field input,.field select,.field textarea{padding:11px 10px}.order-summary{position:static}.order-summary>h3{font-size:21px;margin-bottom:20px}.summary-lines .summary-total{font-size:17px}.summary-product{margin-bottom:22px}.order-summary .field-help{font-size:11px}.size-section{padding-block:38px;grid-template-columns:1fr;gap:16px}.size-section h2{font-size:25px}.size-section p{font-size:11px;margin-bottom:5px}table{font-size:11px}th,td{padding:11px 10px}.policies-section{padding-block:37px}.policy-grid{grid-template-columns:1fr;gap:0;margin-top:23px}.policy-grid details+details{border-top:0}.policy-grid summary{font-size:12px}.contact-row{display:block;margin-top:25px}.contact-row>div{margin-top:9px}.contact-row a{margin-inline:0 17px}.site-footer{padding-block:27px}.site-footer>.shell{flex-wrap:wrap;gap:17px}.site-footer>.shell>span{display:none}.site-footer .brand{font-size:17px}.notice{font-size:11px;padding:14px}.success-panel{padding:35px 18px}.success-panel h2{font-size:28px}.success-panel>p{font-size:12px}}@media(max-width:370px){.shell{width:calc(100% - 28px)}.hero-copy h1{font-size:37px}.fields-grid{grid-template-columns:1fr}.span-full{grid-column:auto}.form-card{padding:17px}.hero-art svg{margin-top:-18px}.art-disclaimer{font-size:8px}}
+</style>
+<style>
+/* EDITORIAL V2 — reference-inspired, original styling. Keeps store IDs and flows intact. */
+:root{--ink:#55202d;--wine:#632333;--wine-light:#f1e5e1;--paper:#f7eeeb;--muted:#856f70;--line:#e8d8d3;--white:#fff;--radius:0}
+html{scroll-behavior:smooth}
+body{background:#d98b32;color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55;overflow-x:hidden}
+body:before{content:"THE FIRST DROP  /  BRAND NAME";position:fixed;left:17px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;color:#fff;font-size:10px;letter-spacing:4px;z-index:0;pointer-events:none}
+body>header,body>main,body>footer,body>.announcement{position:relative}
+body>main,body>.site-header,body>.site-footer{background:#f7eeeb}
+body>.announcement{margin:0 4.3%;background:#632333;letter-spacing:2px;text-transform:uppercase}
+body>.site-header{margin:0 4.3%;width:auto;max-width:none;height:96px;padding-inline:max(4%,calc((100% - 1240px)/2));border:0}
+body>main{margin:0 4.3%;padding-bottom:22px}
+body>.site-footer{margin:0 4.3% 44px}
+.shell{width:min(1220px,calc(100% - 9%))}
+.brand{font-family:Georgia,Times New Roman,serif;font-size:30px;letter-spacing:-1px;color:#632333}
+.site-header nav{gap:45px;letter-spacing:1.6px;font-size:10px;text-transform:uppercase;font-weight:700}
+.site-header nav a:hover{border-bottom:1px solid currentColor}
+.header-cta{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;border-color:#632333}
+.hero{min-height:690px;grid-template-columns:1fr 1.05fr;gap:6%;padding-block:56px 94px;align-items:center}
+.hero-copy{position:relative;z-index:2}
+.eyebrow{color:#9d603e;font-size:10px;letter-spacing:3px;text-transform:uppercase}
+.tiny-line{background:#9d603e}
+h1,h2,h3{font-family:Georgia,Times New Roman,serif;font-weight:500}
+h1{font-size:clamp(56px,6vw,104px);line-height:1.08;letter-spacing:-3.7px;max-width:650px}
+h1 span{color:#8e3943}
+.hero-copy>p{font-size:14px;line-height:2;max-width:380px}
+.button{border-radius:0;letter-spacing:1px;text-transform:uppercase;font-size:11px}
+.primary{background:#632333}.primary:hover{background:#8e3943}
+.hero-note{font-size:10px;letter-spacing:.8px;text-transform:uppercase}
+.hero-art{min-height:560px;padding:22px;background:#e4ad74;isolation:isolate}
+.hero-art:before{border-radius:0;inset:8%;border-color:#f5d6b9}
+.hero-art:after{content:"001 — THE COLLECTION";position:absolute;right:15px;bottom:12px;font-size:9px;letter-spacing:2px;z-index:3}
+.hero-photo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .35s;z-index:0}
+.hero-art.has-photo .hero-photo{opacity:1}
+.hero-art.has-photo svg{visibility:hidden}
+.hero-art svg{max-height:470px;filter:drop-shadow(0 24px 24px #6f3a252b);animation:softFloat 6s ease-in-out infinite}
+.art-topline,.art-bottomline,.art-disclaimer{z-index:2;color:#632333}
+.art-disclaimer{margin:0}
+.detail-strip{background:#632333;color:#f7eeeb;border:0;letter-spacing:1.7px;text-transform:uppercase;font-size:10px}
+.detail-strip span+span{border-color:#ffffff3d}
+.product-section{padding-block:120px 95px;gap:5%}
+.product-section h2,.section-heading h2,.size-section h2,.policies-section h2{font-size:clamp(36px,4vw,62px);line-height:1.17;letter-spacing:-1.5px}
+.product-aside{border-color:#c5aba4;padding-inline-start:36px}
+.product-aside h3{font-size:32px;line-height:1.15}
+.product-gallery{margin-top:40px;gap:22px}
+.product-gallery figure{flex-basis:min(400px,74vw);overflow:hidden}
+.product-gallery img{aspect-ratio:3/4;transition:transform .7s}
+.product-gallery img:hover{transform:scale(1.045)}
+.order-section,.size-section,.policies-section{padding-block:90px;border-color:var(--line)}
+.form-card,.success-panel{background:#fffaf7;border:1px solid #e8d8d3;border-radius:0}
+.order-summary{top:16px}
+.summary-preorder,.notice{background:#f6ebe5;border-radius:0}
+.size-button,.color-button,.field input,.field select,.field textarea{border-radius:0}
+.size-button[aria-pressed=true]{background:#632333}
+.color-button[aria-pressed=true]{border-color:#632333;background:#f7eeeb;box-shadow:0 0 0 1px #632333}
+.site-footer{border:0}
+.site-footer>.shell{padding-block:36px}
+.reveal-ready{opacity:0;transform:translateY(36px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.8,.2,1)}
+.reveal-ready.is-visible{opacity:1;transform:translateY(0)}
+@keyframes softFloat{50%{transform:translateY(-12px)}}
+@media(max-width:860px){body:before{display:none}body>.announcement,body>.site-header,body>main,body>.site-footer{margin-inline:0}.site-header{padding-inline:5%!important;height:80px}.site-header nav{gap:14px;font-size:9px}.hero{min-height:auto;grid-template-columns:1fr;gap:22px;padding-block:60px}.hero-art{min-height:430px}.hero-art svg{max-height:370px}h1{font-size:clamp(58px,13vw,86px)}.product-section{padding-block:65px}.detail-strip>.shell{gap:15px;flex-wrap:wrap}.detail-strip span+span{padding-inline-start:12px}}
+@media(max-width:520px){.shell{width:calc(100% - 38px)}.site-header nav{display:none}.header-cta{gap:6px}.hero-art{min-height:365px}.hero-art svg{max-height:310px}.product-section h2,.section-heading h2{font-size:36px}.checkout-grid{grid-template-columns:1fr}.product-aside{padding-inline-start:22px}.form-card{padding:20px}.fields-grid{grid-template-columns:1fr}.site-footer>.shell{flex-wrap:wrap;gap:16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero-art svg{animation:none}.reveal-ready{transition:none;opacity:1;transform:none}.product-gallery img{transition:none}}
+</style>
+
+</head>
+<body>
+  <div class="announcement" id="modeBanner" role="status">Loading the collection…</div>
+  <header class="site-header shell">
+    <a href="#" class="brand" aria-label="Home" id="navBrand">BRAND NAME</a>
+    <nav aria-label="Main navigation"><a href="#product">Collection</a><a href="#size-guide">Size Guide</a><a href="#policies">Details</a></nav>
+    <a class="header-cta" href="#order">Shop the drop <span aria-hidden="true">↙</span></a>
+  </header>
+  <main>
+    <section class="hero shell" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="tiny-line"></span> THE FIRST EDITION / 2026</span>
+        <h1 id="heroTitle">The New<br><span>Collection.</span></h1>
+        <p id="brandDescription">An introduction to everyday essentials. Considered silhouettes. Uncomplicated style.</p>
+        <a href="#order" class="button primary">Explore the drop <span aria-hidden="true">↙</span></a>
+        <div class="hero-note"><span aria-hidden="true">◷</span><span>هذه Collection Availableة بنظام الطلب المسبق</span></div>
+      </div>
+      <div class="hero-art" aria-labelledby="illustrationCaption"><div class="hero-photo" id="heroPhoto" aria-hidden="true"></div>
+        <div class="art-topline"><span>THE FIRST DROP</span><span>EDITORIAL / 01</span></div>
+        <svg id="sweatshirt" viewBox="0 0 660 620" role="img" aria-label="Illustrative sweatshirt artwork, not a product photograph">
+          <defs><linearGradient id="fabric" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#822b44"/><stop offset="1" stop-color="#501627"/></linearGradient><filter id="shadow" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-opacity=".15"/></filter></defs>
+          <ellipse cx="334" cy="555" rx="184" ry="21" fill="#000" opacity=".05"/>
+          <g filter="url(#shadow)">
+            <path class="garment" d="M242 120 190 140 141 177 75 363 135 391 211 253 205 498Q330 526 455 498L449 253 525 391 585 363 519 177 470 140 418 120Q386 154 330 154T242 120Z" fill="url(#fabric)"/>
+            <path d="M242 120Q265 196 330 196T418 120L390 108Q330 151 270 108Z" fill="#481322"/>
+            <path d="M270 108Q330 151 390 108" fill="none" stroke="#a15066" stroke-width="4" opacity=".55"/>
+            <path d="M205 471Q330 493 455 471L455 498Q330 526 205 498Z" fill="#471523"/>
+            <path d="M75 363 135 391 122 414 64 386Z M525 391 585 363 596 386 538 414Z" fill="#471523"/>
+            <path d="M194 160 212 250 M466 160 448 250 M220 259 219 457 M440 259 441 457" stroke="#ab5a70" stroke-width="2" fill="none" opacity=".3"/>
+            <path d="M244 209Q330 221 416 209" stroke="#fff" opacity=".025" stroke-width="65" fill="none"/>
+            <text x="330" y="270" fill="#f4eae0" font-family="Arial,sans-serif" font-size="10" letter-spacing="4" text-anchor="middle" opacity=".7">BRAND NAME</text>
+          </g>
+        </svg>
+        <div class="art-bottomline"><span id="artColor">Burgundy</span><span>BLACK / BURGUNDY</span></div>
+        <p id="illustrationCaption" class="art-disclaimer">Illustration placeholder — replace with actual product photography</p>
+      </div>
+    </section>
+    <div class="detail-strip"><div class="shell"><span>CURATED ESSENTIALS</span><span>أسود + Burgundy</span><span>THE FIRST DROP / PRE-ORDER</span></div></div>
+    <div id="loadError" class="shell" role="alert" hidden><div class="notice error"><p id="loadErrorText"></p><button type="button" id="reloadCatalog" class="button secondary">Try again</button></div></div>
+    <section id="product" class="product-section shell" aria-labelledby="productTitle">
+      <div><span class="eyebrow">01 — Collection</span><h2 id="productTitle">The Essential Sweatshirt</h2><p id="productDescription" class="section-lead">جارٍ تحميل تفاصيل Collection…</p><div class="product-facts"><div><span class="muted">Fabric</span><p id="material">To be confirmed</p></div><div><span class="muted">Fit</span><p id="fit">To be confirmed</p></div></div></div>
+      <div class="product-aside"><span class="eyebrow">PRE-ORDER</span><h3>Made for your order.</h3><p id="preorderMessage">Check the estimated dispatch and delivery window before ordering.</p><div class="timing"><span>Expected dispatch</span><strong id="shippingExpected">To be announced</strong><span>Delivery after dispatch</span><strong id="deliveryExpected">Shown after selecting your governorate</strong></div></div>
+      <div id="productGallery" class="product-gallery" hidden></div>
+    </section>
+    <section id="order" class="order-section shell" aria-labelledby="orderTitle">
+      <div class="section-heading"><div><span class="eyebrow">02 — YOUR ORDER</span><h2 id="orderTitle">Find your fit.</h2></div><p>اختيار Collection وDelivery details، في خطوة واحدة.</p></div>
+      <div id="launchNotice" class="notice" role="status" hidden></div>
+      <form id="orderForm" novalidate>
+        <fieldset id="orderFields" disabled>
+          <div class="checkout-grid">
+            <div class="checkout-main">
+              <div class="form-card choices-card">
+                <div class="card-heading"><span class="step-number">01</span><h3>Collection</h3></div>
+                <label class="field-label" id="colorLabel">Color <span id="colorName" class="muted"></span></label><div id="colorOptions" class="color-options" role="group" aria-labelledby="colorLabel"></div>
+                <div class="size-label"><span class="field-label" id="sizeLabel">Size</span><a href="#size-guide">دليل Size Guide ↙</a></div><div id="sizeOptions" class="size-options" role="group" aria-labelledby="sizeLabel"></div>
+                <p id="selectionStatus" class="field-help" role="status"></p>
+                <label for="quantity" class="field-label">Quantity</label><div class="quantity-control"><button type="button" id="decreaseQuantity" aria-label="تقليل Quantity">−</button><input id="quantity" name="quantity" type="number" value="1" min="1" max="5" inputmode="numeric" required><button type="button" id="increaseQuantity" aria-label="زيادة Quantity">+</button></div>
+              </div>
+              <div class="form-card">
+                <div class="card-heading"><span class="step-number">02</span><h3>Delivery details</h3></div><p class="field-help">No account required. Your details are used for order updates and delivery.</p>
+                <div class="fields-grid">
+                  <div class="field"><label for="customerName">Full name</label><input id="customerName" name="name" autocomplete="name" minlength="2" maxlength="100" required placeholder="Recipient name"></div>
+                  <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" dir="ltr" autocomplete="tel" maxlength="20" required placeholder="01xxxxxxxxx"><span class="field-help">Egyptian mobile number for order updates</span></div>
+                  <div class="field"><label for="governorate">Governorate</label><select id="governorate" name="governorate" required><option value="">اختار Governorate</option></select></div>
+                  <div class="field"><label for="city">City / area</label><input id="city" name="city" autocomplete="address-level2" minlength="2" maxlength="100" required placeholder="City or area"></div>
+                  <div class="field span-full"><label for="address">Full address</label><textarea id="address" name="address" autocomplete="street-address" rows="2" minlength="8" maxlength="500" required placeholder="Street, building, floor, apartment and landmark"></textarea></div>
+                  <div class="field span-full"><label for="notes">Notes <span class="muted">(optional)</span></label><textarea id="notes" name="notes" rows="2" maxlength="500" placeholder="Additional delivery details"></textarea></div>
+                </div>
+                <div class="honeypot" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+              </div>
+            </div>
+            <aside class="order-summary form-card" aria-labelledby="summaryTitle">
+              <span class="eyebrow">YOUR FIRST PIECE</span><h3 id="summaryTitle">Order summary</h3>
+              <div class="summary-product"><div class="mini-swatch" id="summarySwatch"></div><div><strong id="summaryName">The Essential Sweatshirt</strong><span id="summaryVariant" class="muted">اختار Color وSize</span></div></div>
+              <dl class="summary-lines"><div><dt>Subtotal</dt><dd id="subtotal">—</dd></div><div><dt>Shipping</dt><dd id="shippingFee">اختار Governorate</dd></div><div class="summary-total"><dt>Total</dt><dd id="total">—</dd></div></dl>
+              <div class="summary-preorder"><strong>This is a pre-order</strong><p id="summaryShipping">موعد Shipping To be announced.</p><p id="summaryDelivery">مدة التوصيل تظهر بعد اختيار Governorate.</p></div>
+              <p id="paymentDescription" class="field-help"></p>
+              <p class="field-help">Submitting places your request with the store. No payment is collected on this page.</p>
+              <button type="submit" id="submitOrder" class="button primary full-width">Submit demo order <span aria-hidden="true">↙</span></button>
+            </aside>
+          </div>
+        </fieldset>
+        <div id="submitStatus" class="notice" role="status" tabindex="-1" hidden></div>
+        <div id="retryActions" class="retry-actions" hidden><button id="retryOrder" type="button" class="button primary">Retry the same order</button><button id="differentOrder" type="button" class="button secondary">Start a different order</button></div>
+      </form>
+      <section id="successPanel" class="success-panel" tabindex="-1" hidden aria-labelledby="successTitle"><span class="success-icon" aria-hidden="true">✓</span><span class="eyebrow" id="successMode">Demo order</span><h2 id="successTitle">Your order is received.</h2><p id="successDescription"></p><p class="order-number"><span>Order number</span><strong id="successOrderId" dir="ltr"></strong></p><p id="successTotal"></p><p class="field-help">احتفظ بOrder number للمتابعة. الطلب لا يعني أن الدفع تم تحصيله.</p><button id="newOrder" type="button" class="button secondary">New order</button></section>
+    </section>
+    <section id="size-guide" class="size-section shell" aria-labelledby="sizeTitle"><div><span class="eyebrow">03 — Size المناسب</span><h2 id="sizeTitle">The size guide.</h2><p class="muted" id="guideNote">Sample measurements only. Confirm real measurements before launch.</p></div><div class="table-scroll"><table><caption class="sr-only">جدول Size Guide بالسنتيمتر</caption><thead><tr><th scope="col">Size</th><th scope="col">Chest (cm)</th><th scope="col">Length (cm)</th><th scope="col">Sleeve (cm)</th><th scope="col">Notes</th></tr></thead><tbody id="sizeGuideBody"></tbody></table></div></section>
+    <section id="policies" class="policies-section shell" aria-labelledby="policiesTitle"><span class="eyebrow">04 — Details تفرق</span><h2 id="policiesTitle">Before you order.</h2><div class="policy-grid"><details><summary>Shipping والتوصيل <span aria-hidden="true">+</span></summary><p id="shippingPolicy">سياسة Shipping To be confirmed.</p></details><details><summary>Exchanges <span aria-hidden="true">+</span></summary><p id="exchangePolicy">سياسة Exchanges To be confirmed.</p></details><details><summary>Returns <span aria-hidden="true">+</span></summary><p id="returnPolicy">سياسة Returns To be confirmed.</p></details></div><div class="contact-row"><span>Any questions?</span><div id="contactLinks"><span class="muted">Contact details coming soon.</span></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="shell"><a href="#" class="brand" id="footerBrand">BRAND NAME</a><span>A new point of view.</span><a href="#order">Shop now ↖</a></div></footer>
+  <script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { catalog: null, color: '', size: '', busy: false, pending: null, checkoutStarted: false, key: '', lastReceipt: null, utm: {} };
+  var safeRejected = ['VALIDATION', 'PHONE_INVALID', 'UNAVAILABLE', 'CAPACITY', 'LAUNCH_NOT_READY', 'ORDERS_CLOSED', 'BOT_REJECTED', 'CHECKOUT_EXPIRED', 'TOO_FAST', 'RATE_LIMIT'];
+  var money = function (minor) { return new Intl.NumberFormat('en-EG', { style: 'currency', currency: 'EGP', maximumFractionDigits: 2 }).format(Number(minor || 0) / 100); };
+  var truth = function (value) { return value === true || value === 'true' || value === 'TRUE'; };
+  function storageGet(key) { try { return sessionStorage.getItem(key); } catch (_) { return null; } }
+  function storageSet(key, value) { try { sessionStorage.setItem(key, value); } catch (_) {} }
+  function storageRemove(key) { try { sessionStorage.removeItem(key); } catch (_) {} }
+  function freshKey() {
+    if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+    var bytes = new Uint8Array(24); window.crypto.getRandomValues(bytes);
+    return Array.from(bytes, function (v) { return v.toString(16).padStart(2, '0'); }).join('');
+  }
+  function currentKey() { if (!state.key) { state.key = storageGet('brand-store:order-key') || freshKey(); storageSet('brand-store:order-key', state.key); } return state.key; }
+  function rotateKey() { state.key = freshKey(); storageSet('brand-store:order-key', state.key); storageRemove('brand-store:pending'); }
+  function setText(id, value) { $(id).textContent = value == null ? '' : String(value); }
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function element(tag, className, value) { var node = document.createElement(tag); if (className) node.className = className; if (value != null) node.textContent = String(value); return node; }
+  function api(name, payload) {
+    var operation;
+    if (window.StoreTransport && typeof window.StoreTransport.request === 'function') {
+      operation = window.StoreTransport.request(name, payload);
+    } else if (window.google && google.script && google.script.run) {
+      operation = new Promise(function (resolve, reject) {
+        var runner = google.script.run.withSuccessHandler(resolve).withFailureHandler(function () { reject({ code: 'TRANSPORT', message: 'تعذّر التأكد من نتيجة الإرسال. أعد المحاولة بنفس الطلب.' }); });
+        if (payload === undefined) runner[name](); else runner[name](payload);
+      });
+    } else {
+      return Promise.reject({ code: 'TRANSPORT', message: 'هذه الصفحة تحتاج تشغيلها من نشر Google Apps Script، أو من خادم المعاينة المحلي المرفق.' });
+    }
+    return Promise.resolve(operation).then(function (result) {
+      if (!result || result.ok !== true) throw (result && result.error) || { code: 'TRANSPORT', message: 'تعذّر التحقق من استجابة المتجر.' };
+      return result.data;
+    });
+  }
+  function emit(name, extra) {
+    var detail = { event: name, currency: 'EGP', mode: state.catalog && truth(state.catalog.settings.test_mode) ? 'demo' : 'live' };
+    Object.keys(extra || {}).forEach(function (key) { detail[key] = extra[key]; });
+    window.dispatchEvent(new CustomEvent('store:analytics', { detail: detail }));
+  }
+  function selectedVariant() {
+    if (!state.catalog) return null;
+    return state.catalog.variants.find(function (variant) { return variant.color === state.color && variant.size === state.size; }) || null;
+  }
+  function variantAvailable(variant) { return variant && truth(variant.active) && variant.available !== false && variant.available !== 'false'; }
+  function selectedShipping() { return state.catalog && state.catalog.shipping.find(function (row) { return row.id === $('governorate').value; }); }
+  function quantity() { var value = Number($('quantity').value); return Number.isInteger(value) && value >= 1 ? value : 0; }
+  function isOpen() {
+    if (!state.catalog) return false;
+    return !!state.catalog.product.id && (truth(state.catalog.settings.test_mode) || (truth(state.catalog.settings.orders_open) && state.catalog.readiness.ready));
+  }
+  function setStatus(message, error) {
+    $('submitStatus').hidden = !message; $('submitStatus').classList.toggle('error', !!error); setText('submitStatus', message || '');
+    if (message) $('submitStatus').focus({ preventScroll: true });
+  }
+  function renderChoices() {
+    var catalog = state.catalog;
+    var colors = []; catalog.variants.forEach(function (v) { if (!colors.some(function (c) { return c.color === v.color; })) colors.push(v); });
+    if (!colors.some(function (c) { return c.color === state.color; })) state.color = colors.length ? colors[0].color : '';
+    clear($('colorOptions'));
+    colors.forEach(function (v) {
+      var button = element('button', 'color-button'); button.type = 'button'; button.setAttribute('aria-pressed', String(state.color === v.color));
+      var dot = element('span', 'color-dot'); dot.style.background = v.color === 'black' ? '#242123' : '#651e32'; button.appendChild(dot); button.appendChild(element('span', '', v.color_label));
+      button.disabled = !catalog.variants.some(function (candidate) { return candidate.color === v.color && variantAvailable(candidate); });
+      button.addEventListener('click', function () { state.color = v.color; state.size = ''; renderChoices(); updateSummary(); beginCheckout(); });
+      $('colorOptions').appendChild(button);
+    });
+    var selectedColor = colors.find(function (c) { return c.color === state.color; });
+    setText('colorName', selectedColor ? selectedColor.color_label : ''); setText('artColor', selectedColor ? selectedColor.color_label : '');
+    var dark = state.color === 'black';
+    var stops = document.querySelectorAll('#fabric stop'); stops[0].setAttribute('stop-color', dark ? '#3b3739' : '#822b44'); stops[1].setAttribute('stop-color', dark ? '#171517' : '#501627');
+    $('summarySwatch').style.background = dark ? '#242123' : '#651e32';
+    var sizes = catalog.variants.filter(function (v) { return v.color === state.color; });
+    if (!sizes.some(function (v) { return v.size === state.size && variantAvailable(v); })) { var first = sizes.find(variantAvailable); state.size = first ? first.size : ''; }
+    clear($('sizeOptions'));
+    sizes.forEach(function (v) {
+      var button = element('button', 'size-button', v.size); button.type = 'button'; button.dir = 'ltr'; button.disabled = !variantAvailable(v); button.setAttribute('aria-pressed', String(state.size === v.size)); button.setAttribute('aria-label', 'مقاس ' + v.size + (button.disabled ? ' Unavailable' : ''));
+      button.addEventListener('click', function () { state.size = v.size; renderChoices(); updateSummary(); beginCheckout(); }); $('sizeOptions').appendChild(button);
+    });
+  }
+  function updateSummary() {
+    if (!state.catalog) return;
+    var variant = selectedVariant(); var ship = selectedShipping(); var qty = quantity();
+    var subtotal = variant && qty ? variant.price_minor * qty : null;
+    setText('summaryName', state.catalog.product.name); setText('summaryVariant', variant ? variant.color_label + ' / ' + variant.size + ' / Quantity: ' + (qty || '—') : 'اختار لونًا ومقاسًا Availableين');
+    setText('selectionStatus', variantAvailable(variant) ? 'السعر للقطعة: ' + money(variant.price_minor) : 'هذا الاختيار Unavailable حاليًا.');
+    setText('subtotal', subtotal == null ? '—' : money(subtotal)); setText('shippingFee', ship ? money(ship.fee_minor) : 'اختار Governorate'); setText('total', subtotal != null && ship ? money(subtotal + ship.fee_minor) : '—');
+    var delivery = ship ? String(ship.delivery_days) : 'Shown after selecting your governorate';
+    setText('deliveryExpected', delivery); setText('summaryDelivery', ship ? 'Delivery after dispatch: ' + delivery : 'مدة التوصيل تظهر بعد اختيار Governorate.');
+    $('submitOrder').disabled = state.busy || !isOpen() || !variantAvailable(variant) || !qty || !ship;
+  }
+  function safeImage(url) { try { var value = new URL(url); return value.protocol === 'https:' ? value.href : ''; } catch (_) { return ''; } }
+  function renderCatalog(catalog) {
+    var hasProduct = !!catalog.product;
+    catalog.product = catalog.product || { id: '', name: 'المنتج قيد الإعداد', description: 'تفاصيل المنتج لم تكتمل بعد.', material: '', fit: '', images: [], is_demo: true };
+    catalog.variants = catalog.variants || []; catalog.shipping = catalog.shipping || []; catalog.sizeGuide = catalog.sizeGuide || [];
+    catalog.readiness = catalog.readiness || { ready: false, issues: [] };
+    state.catalog = catalog;
+    var maxQuantity = Number(catalog.checkout && catalog.checkout.max_order_qty);
+    $('quantity').max = String(Number.isInteger(maxQuantity) && maxQuantity > 0 ? maxQuantity : 5);
+    if (quantity() > Number($('quantity').max)) $('quantity').value = $('quantity').max;
+    var settings = catalog.settings; var demo = truth(settings.test_mode);
+    document.title = settings.brand_name + ' | Pre-order'; setText('navBrand', settings.brand_name); setText('footerBrand', settings.brand_name);
+    setText('modeBanner', demo ? 'وضع تجريبي — الأسعار والقياسات للتجربة، ولا نستقبل طلبات بيع حقيقية.' : 'Pre-order — راجع موعد Shipping ومدة التوصيل قبل تأكيد طلبك.');
+    setText('brandDescription', settings.brand_description); setText('productTitle', catalog.product.name); setText('productDescription', catalog.product.description);
+    setText('material', catalog.product.material || 'To be confirmed'); setText('fit', catalog.product.fit || 'To be confirmed');
+    setText('preorderMessage', settings.preorder_message || 'هذا المنتج بنظام الطلب المسبق.'); setText('shippingExpected', settings.shipping_expected || 'To be announced');
+    setText('summaryShipping', 'Expected dispatch: ' + (settings.shipping_expected || 'To be announced'));
+    setText('shippingPolicy', settings.shipping_policy || 'سياسة Shipping To be confirmed.'); setText('exchangePolicy', settings.exchange_policy || 'سياسة Exchanges To be confirmed.'); setText('returnPolicy', settings.return_policy || 'سياسة Returns To be confirmed.');
+    setText('guideNote', demo || truth(catalog.product.is_demo) ? 'Sample measurements only. Confirm real measurements before launch.' : 'القياسات بالسنتيمتر. راجع Notes كل مقاس قبل الاختيار.');
+    var paymentText = { demo: 'طريقة الدفع: وضع تجريبي، لا يتم تحصيل أموال.', cod: 'طريقة الدفع: الدفع عند الاستلام. لا يُعتبر إرسال الطلب دفعًا محصلًا.', manual_transfer: 'طريقة الدفع: تحويل يدوي، وفق تعليمات المتجر. تسجيل التحصيل من الإدارة فقط.' };
+    setText('paymentDescription', paymentText[settings.payment_method] || 'طريقة الدفع لم تُحدد بعد.');
+    clear($('contactLinks'));
+    var contactAdded = false;
+    var phone = String(settings.contact_phone || '').replace(/[\s()-]/g, '');
+    if (/^\+?[\d]{10,15}$/.test(phone)) { var phoneLink = element('a', '', 'اتصل بنا'); phoneLink.href = 'tel:' + phone; $('contactLinks').appendChild(phoneLink); contactAdded = true; }
+    var email = String(settings.contact_email || '');
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !/[\r\n]/.test(email)) { var emailLink = element('a', '', 'البريد الإلكتروني'); emailLink.href = 'mailto:' + encodeURIComponent(email); $('contactLinks').appendChild(emailLink); contactAdded = true; }
+    if (!contactAdded) $('contactLinks').appendChild(element('span', 'muted', 'Contact details coming soon.'));
+    clear($('sizeGuideBody'));
+    catalog.sizeGuide.forEach(function (row) { var tr = element('tr'); [row.size, row.chest_cm, row.length_cm, row.sleeve_cm, row.notes].forEach(function (value) { tr.appendChild(element('td', '', value)); }); $('sizeGuideBody').appendChild(tr); });
+    if (!catalog.sizeGuide.length) { var tr = element('tr'); var cell = element('td', '', 'جدول Size Guide To be announced.'); cell.colSpan = 5; tr.appendChild(cell); $('sizeGuideBody').appendChild(tr); }
+    var previousGov = $('governorate').value; clear($('governorate')); var placeholder = element('option', '', 'اختار Governorate'); placeholder.value = ''; $('governorate').appendChild(placeholder);
+    catalog.shipping.forEach(function (row) { var option = element('option', '', row.governorate); option.value = row.id; $('governorate').appendChild(option); }); $('governorate').value = previousGov;
+    clear($('productGallery'));
+    (catalog.product.images || []).forEach(function (url) { var src = safeImage(url); if (!src) return; var figure = element('figure'); var img = element('img'); img.src = src; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer'; img.alt = catalog.product.name; figure.appendChild(img); figure.appendChild(element('figcaption', '', truth(catalog.product.is_demo) ? 'صورة بديلة للتجهيز — ليست توثيقًا للمنتج النهائي' : catalog.product.name)); $('productGallery').appendChild(figure); }); $('productGallery').hidden = !$('productGallery').children.length;
+    renderChoices();
+    var issues = (catalog.readiness.issues || []).join('\n• ');
+    if (!hasProduct) { $('launchNotice').hidden = false; setText('launchNotice', 'المنتج قيد الإعداد؛ استقبال الطلبات متوقف حتى تكتمل تفاصيل المنتج.' + (issues ? '\n• ' + issues : '')); }
+    else if (demo) { $('launchNotice').hidden = false; setText('launchNotice', 'أنت في وضع التجربة: يمكنك Submit demo order يظهر للإدارة منفصلًا عن الطلبات الحقيقية. لا يوجد تحصيل أموال أو التزام بتوصيل هذا الطلب.'); }
+    else if (!isOpen()) { $('launchNotice').hidden = false; setText('launchNotice', 'استقبال الطلبات الحقيقية متوقف حتى اكتمال إعدادات الإطلاق.' + (issues ? '\n• ' + issues : '')); }
+    else $('launchNotice').hidden = true;
+    setText('submitOrder', demo ? 'Submit demo order ↙' : 'تأكيد Pre-order ↙');
+    $('orderFields').disabled = !isOpen() || state.busy || !!state.pending;
+    $('loadError').hidden = true;
+    updateSummary();
+  }
+  function loadCatalog() {
+    $('reloadCatalog').disabled = true;
+    return api('getCatalog').then(function (catalog) {
+      renderCatalog(catalog); emit('view_item', { item_id: catalog.product.id });
+      if (storageGet('brand-store:pending') && !state.pending && !state.lastReceipt) {
+        setStatus('يوجد إرسال سابق لم نتأكد من نتيجته في هذه الجلسة. إذا أعدت إدخال نفس البيانات، سيمنع الخادم تكرار الطلب. لطلب مختلف استخدم زر «Start a different order» بعد التأكد من الطلب السابق.', false);
+        $('retryActions').hidden = false; $('retryOrder').hidden = true;
+      }
+    }).catch(function (error) { $('loadError').hidden = false; setText('loadErrorText', error.message || 'تعذّر تحميل المتجر. أعد المحاولة.'); setText('modeBanner', 'تعذّر تحميل المتجر'); $('orderFields').disabled = true; }).finally(function () { $('reloadCatalog').disabled = false; });
+  }
+  function beginCheckout() {
+    if (state.checkoutStarted || !state.catalog) return; state.checkoutStarted = true;
+    emit('begin_checkout', { item_id: state.catalog.product.id });
+  }
+  function readUtm(getParameter) {
+    var result = {};
+    ['source', 'medium', 'campaign', 'term', 'content'].forEach(function (key) { result[key] = String(getParameter('utm_' + key) || '').slice(0, 150); });
+    return result;
+  }
+  function initializeAttribution() {
+    var params = new URLSearchParams(window.location.search);
+    state.utm = readUtm(function (key) { return params.get(key); });
+    // HTML Service runs in an iframe. Read only the approved campaign keys from the enclosing Apps Script URL.
+    if (window.google && google.script && google.script.url && google.script.url.getLocation) {
+      google.script.url.getLocation(function (location) {
+        var values = location && location.parameter || {};
+        state.utm = readUtm(function (key) { return values[key]; });
+      });
+    }
+  }
+  function getUtm() { return Object.assign({}, state.utm); }
+  function payloadFromForm() {
+    return { idempotency_key: currentKey(), checkout_token: state.catalog.checkout.token, honeypot: $('website').value, customer: { name: $('customerName').value.trim(), phone: $('phone').value.trim(), governorate_id: $('governorate').value, city: $('city').value.trim(), address: $('address').value.trim(), notes: $('notes').value.trim() }, items: [{ variant_id: selectedVariant().id, quantity: quantity() }], utm: getUtm() };
+  }
+  function normalizePhonePreview(value) {
+    var digits = value.replace(/[\s()-]/g, '').replace(/[٠-٩]/g, function (c) { return String(c.charCodeAt(0) - 1632); });
+    digits = digits.replace(/^\+20|^0020|^20/, '0'); return /^01[0125]\d{8}$/.test(digits);
+  }
+  function submit(payload) {
+    if (state.busy) return;
+    state.busy = true; state.pending = payload; storageSet('brand-store:pending', '1'); $('orderFields').disabled = true; $('retryOrder').disabled = true; $('differentOrder').disabled = true; $('retryActions').hidden = true;
+    setStatus('Submitting your order… keep this page open.', false);
+    api('submitOrder', payload).then(function (receipt) {
+      state.lastReceipt = receipt; state.pending = null; storageRemove('brand-store:pending'); storageRemove('brand-store:order-key'); state.key = '';
+      $('orderForm').hidden = true; $('successPanel').hidden = false; setText('successOrderId', receipt.order_id); setText('successMode', receipt.mode === 'demo' ? 'Demo order' : 'Pre-order');
+      setText('successTitle', receipt.mode === 'demo' ? 'Your demo order has been received.' : 'Your order is received.');
+      setText('successDescription', receipt.mode === 'demo' ? 'This is a demo order visible to store management. No payment has been made.' : 'تم تسجيل طلبك المسبق. تابع تعليمات المتجر واحتفظ بOrder number للمتابعة.');
+      setText('successTotal', 'Total المسجل: ' + money(receipt.total_minor)); $('successPanel').focus();
+      emit('order_submitted', { item_id: state.catalog.product.id, value: receipt.total_minor / 100 });
+    }).catch(function (error) {
+      var definite = safeRejected.indexOf(error.code) !== -1;
+      if (definite) {
+        state.pending = null; storageRemove('brand-store:pending'); rotateKey();
+        setStatus(error.message || 'راجع بيانات الطلب ثم أعد الإرسال.', true);
+        if (error.code === 'CHECKOUT_EXPIRED') return loadCatalog();
+      } else {
+        setStatus((error.code === 'IDEMPOTENCY_CONFLICT' ? 'هذا المفتاح مرتبط بطلب ببيانات مختلفة. تأكد من الطلب السابق قبل بدء New order.' : 'We couldn't التأكد من نتيجة الإرسال. قد يكون الطلب محفوظًا. أعد إرسال نفس الطلب؛ سيمنع الخادم تكراره.') + '\nCheck the current order before placing another.', true);
+        $('retryActions').hidden = false; $('retryOrder').hidden = error.code === 'IDEMPOTENCY_CONFLICT';
+      }
+    }).finally(function () {
+      state.busy = false; $('retryOrder').disabled = false; $('differentOrder').disabled = false;
+      $('orderFields').disabled = !isOpen() || !!state.pending; updateSummary();
+    });
+  }
+  $('orderForm').addEventListener('submit', function (event) {
+    event.preventDefault(); if (state.busy || !state.catalog || !isOpen() || !variantAvailable(selectedVariant())) return;
+    if (!$('orderForm').reportValidity()) return;
+    if (!normalizePhonePreview($('phone').value)) { setStatus('Enter a valid Egyptian mobile number starting with 010, 011, 012, or 015.', true); $('phone').focus(); return; }
+    if (!Number.isInteger(Number($('quantity').value)) || !quantity()) { setStatus('Enter a valid quantity of at least one.', true); return; }
+    beginCheckout(); submit(payloadFromForm());
+  });
+  $('orderForm').addEventListener('focusin', function (event) { if (event.target.matches('input,textarea,select')) beginCheckout(); });
+  $('governorate').addEventListener('change', updateSummary); $('quantity').addEventListener('input', updateSummary);
+  $('decreaseQuantity').addEventListener('click', function () { $('quantity').value = String(Math.max(1, quantity() - 1)); updateSummary(); });
+  $('increaseQuantity').addEventListener('click', function () { $('quantity').value = String(Math.min(Number($('quantity').max), quantity() + 1)); updateSummary(); });
+  $('retryOrder').addEventListener('click', function () { if (state.pending) submit(state.pending); });
+  $('differentOrder').addEventListener('click', function () {
+    if (!window.confirm('قد يكون الطلب السابق محفوظًا بالفعل. ابدأ طلبًا مختلفًا فقط بعد التأكد من نتيجته من الإدارة. هل تريد البدء بمفتاح جديد؟')) return;
+    state.pending = null; rotateKey(); $('retryActions').hidden = true; $('retryOrder').hidden = false; setStatus('', false); $('orderFields').disabled = !isOpen(); updateSummary();
+  });
+  $('newOrder').addEventListener('click', function () {
+    state.lastReceipt = null; state.checkoutStarted = false; rotateKey(); $('orderForm').reset(); $('successPanel').hidden = true; $('orderForm').hidden = false; $('retryActions').hidden = true; setStatus('', false); loadCatalog().then(function () { $('order').scrollIntoView({ behavior: 'smooth' }); });
+  });
+  $('reloadCatalog').addEventListener('click', loadCatalog);
+  initializeAttribution(); currentKey(); loadCatalog();
+}());
+</script>
+
+<script>
+(function(){
+  function initEditorial(){
+    var photo=document.getElementById('heroPhoto');
+    var frame=photo&&photo.parentElement;
+    function syncHero(){
+      var img=document.querySelector('#productGallery img');
+      if(img&&img.src&&photo&&frame){photo.style.backgroundImage='url("'+img.src.replace(/"/g,'%22')+'")';frame.classList.add('has-photo');}
+    }
+    if(window.MutationObserver&&document.getElementById('productGallery')){
+      new MutationObserver(syncHero).observe(document.getElementById('productGallery'),{childList:true,subtree:true});
+      syncHero();
+    }
+    var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduced&&'IntersectionObserver' in window){
+      var els=document.querySelectorAll('.product-section,.order-section,.size-section,.policies-section,.product-gallery figure');
+      var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');observer.unobserve(e.target)}})},{threshold:.08});
+      els.forEach(function(el){el.classList.add('reveal-ready');observer.observe(el)});
+      var gallery=document.getElementById('productGallery');
+      if(gallery&&window.MutationObserver)new MutationObserver(function(){gallery.querySelectorAll('figure:not(.reveal-ready)').forEach(function(el){el.classList.add('reveal-ready');observer.observe(el)})}).observe(gallery,{childList:true});
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initEditorial);else initEditorial();
+})();
+</script>
+</body>
+</html>
