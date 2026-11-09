@@ -11,6 +11,23 @@
     @media(max-width:800px){.metrics{grid-template-columns:1fr 1fr}.grid-two,.detail-grid{grid-template-columns:1fr}.identity{max-width:180px}.settings-grid{grid-template-columns:1fr}.settings-grid .wide{grid-column:auto}.shell{padding:0 16px 40px}.modal{padding:18px}.modal-backdrop{padding:12px}.field{min-width:120px}.topbar{align-items:flex-start}.metric strong{font-size:22px}.panel{padding:17px}.pending{align-items:flex-start;flex-direction:column}}
     @media(prefers-reduced-motion:no-preference){.btn,.tab{transition:background .15s,opacity .15s}.btn:hover{opacity:.85}}
   </style>
+<style>
+.editor-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.85fr);gap:25px;margin-top:22px}
+.editor-grid .settings-grid{grid-template-columns:1fr 1fr}
+.editor-grid .field.wide{grid-column:1/-1}
+.editor-preview-wrap{position:sticky;top:18px;align-self:start}
+.editor-preview{margin:12px 0 14px;background:#f7eeeb;color:#632333;border:12px solid #d98b32;min-height:310px}
+.editor-preview-top{font:20px Georgia,serif;padding:17px 20px}
+.editor-preview-inner{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:15px 20px 25px;align-items:center}
+.editor-preview-inner h3{font:32px/1.05 Georgia,serif;overflow-wrap:anywhere;margin:12px 0 25px}
+.editor-preview-inner small{font-size:9px;letter-spacing:1.6px}
+.preview-cta{font-size:10px;display:inline-block;padding:12px;background:#632333;color:#fff;text-transform:uppercase}
+.editor-preview-photo{background:#e4ad74;min-height:190px;display:grid;place-items:center;font-size:10px;letter-spacing:1.5px;background-position:center;background-size:cover}
+.media-uploader{border:1px dashed #c3a49b;padding:18px;display:grid;gap:11px;margin:20px 0}
+.media-uploader input{max-width:100%}.editor-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+@media(max-width:950px){.editor-grid{grid-template-columns:1fr}.editor-preview-wrap{position:static}}
+@media(max-width:600px){.editor-grid .settings-grid{grid-template-columns:1fr}.editor-grid .field.wide{grid-column:auto}.editor-preview-inner h3{font-size:24px}}
+</style>
 </head>
 <body>
 <div class="shell">
@@ -18,7 +35,7 @@
   <div id="notice" class="message" role="status" aria-live="polite" hidden></div>
   <div id="initial-loading" class="loading">جارٍ تحميل الطلبات بأمان…</div>
   <main id="app" hidden>
-    <nav class="tabs" aria-label="أقسام الإدارة" role="tablist"><button class="tab" id="orders-tab" role="tab" aria-selected="true" aria-controls="orders-view">الطلبات والملخص</button><button class="tab" id="settings-tab" role="tab" aria-selected="false" aria-controls="settings-view">إعدادات الإطلاق</button></nav>
+    <nav class="tabs" aria-label="أقسام الإدارة" role="tablist"><button class="tab" id="orders-tab" role="tab" aria-selected="true" aria-controls="orders-view">الطلبات والملخص</button><button class="tab" id="appearance-tab" role="tab" aria-selected="false" aria-controls="appearance-view">Website Editor</button><button class="tab" id="settings-tab" role="tab" aria-selected="false" aria-controls="settings-view">إعدادات الإطلاق</button></nav>
     <section id="orders-view" role="tabpanel" aria-labelledby="orders-tab">
       <form id="filters" class="panel filter-row">
         <div class="field"><label for="filter-mode">نوع البيانات</label><select id="filter-mode" class="control"><option value="demo">طلبات تجريبية</option><option value="live">طلبات حقيقية</option></select></div>
@@ -37,7 +54,40 @@
       <div class="panel"><div class="split"><h2>الطلبات</h2><span class="muted" id="result-count"></span></div><div class="table-wrap"><table><thead><tr><th>رقم الطلب / الوقت</th><th>العميل</th><th>الطلب</th><th>الدفع</th><th>الإجمالي</th><th>المحصل الصافي</th></tr></thead><tbody id="order-rows"></tbody></table><div id="empty-orders" class="empty" hidden>لا توجد طلبات تطابق الاختيارات.</div></div></div>
       <div class="panel"><h2>القطع حسب اللون والمقاس</h2><p class="muted">يعرض الملخص الذي يحسبه الخادم لنوع البيانات والفلاتر المحددة.</p><div class="table-wrap"><table><thead><tr><th>اللون</th><th>المقاس</th><th>عدد القطع</th></tr></thead><tbody id="variant-rows"></tbody></table><div id="empty-variants" class="empty" hidden>لا توجد قطع في هذه النتائج.</div></div></div>
     </section>
-    <section id="settings-view" role="tabpanel" aria-labelledby="settings-tab" hidden>
+    
+<section id="appearance-view" role="tabpanel" aria-labelledby="appearance-tab" hidden>
+ <div class="panel">
+  <div class="split"><div><div class="eyebrow">BRAND STUDIO</div><h2>Website Appearance Editor</h2></div><span class="muted">English storefront · V2</span></div>
+  <p class="muted">Edit the homepage look without changing orders or checkout. Save to publish your changes. Uploads are PUBLIC images; do not upload private photos or customer information.</p>
+  <div class="editor-grid">
+   <form id="appearance-form">
+    <div class="settings-grid">
+     <div class="field wide"><label for="a-hero_title">Hero headline</label><input class="control" id="a-hero_title" maxlength="180" placeholder="The New Collection."></div>
+     <div class="field"><label for="a-hero_kicker">Small headline</label><input class="control" id="a-hero_kicker" maxlength="180"></div>
+     <div class="field"><label for="a-hero_button">Call to action</label><input class="control" id="a-hero_button" maxlength="180"></div>
+     <div class="field"><label for="a-theme">Color theme</label><select class="control" id="a-theme"><option value="editorial">Editorial / Orange & Burgundy</option><option value="minimal">Minimal / Monochrome</option><option value="dark">Dark / Luxury</option></select></div>
+     <div class="field"><label for="a-scroll_animation">Scroll animations</label><select class="control" id="a-scroll_animation"><option value="reveal">Reveal on scroll</option><option value="parallax">Parallax photo + reveal</option><option value="off">No animation</option></select></div>
+     <div class="field wide"><label for="a-hero_image_url">Hero image URL (HTTPS)</label><input class="control ltr" id="a-hero_image_url" type="url" maxlength="1800" placeholder="https://..."></div>
+     <div class="field wide"><label for="a-editorial_image_url">Editorial image URL (HTTPS) — reserved for future section</label><input class="control ltr" id="a-editorial_image_url" type="url" maxlength="1800" placeholder="https://..."></div>
+     <div class="field wide"><label for="a-section_label">Collection label</label><input class="control" id="a-section_label" maxlength="180"></div>
+     <div class="field wide"><label for="a-footer_note">Footer note</label><input class="control" id="a-footer_note" maxlength="180"></div>
+     <div class="field wide"><label for="a-announcement_text">Announcement text (never hides demo or safety notices)</label><input class="control" id="a-announcement_text" maxlength="180"></div>
+    </div>
+    <div class="media-uploader">
+      <label for="appearance-upload"><strong>Upload a public hero photo</strong> · JPG, PNG, WebP · up to 2MB</label>
+      <input type="file" id="appearance-upload" accept="image/jpeg,image/png,image/webp">
+      <button type="button" class="btn secondary" id="upload-appearance">Upload & set hero image</button>
+      <p id="appearance-upload-status" class="muted" role="status"></p>
+    </div>
+    <div class="editor-actions"><button class="btn accent" type="submit" id="save-appearance">Save & publish appearance</button><span id="appearance-save-status" class="muted" role="status"></span></div>
+   </form>
+   <aside class="editor-preview-wrap"><div class="eyebrow">LIVE PREVIEW · UNSAVED</div><div class="editor-preview" id="appearance-preview">
+      <div class="editor-preview-top" id="ap-brand">BRAND NAME</div><div class="editor-preview-inner"><div><small id="ap-kicker">THE FIRST EDITION</small><h3 id="ap-title">The New Collection.</h3><span class="preview-cta" id="ap-button">Explore the drop</span></div><div class="editor-preview-photo" id="ap-photo"><span>YOUR IMAGE</span></div></div>
+   </div><p class="muted">This is an approximate layout preview. Product pictures, prices and sizes still come from Google Sheets.</p></aside>
+  </div>
+ </div>
+</section>
+<section id="settings-view" role="tabpanel" aria-labelledby="settings-tab" hidden>
       <div class="panel"><h2>جاهزية البيع الحقيقي</h2><div id="readiness-box" class="readiness"><strong id="readiness-title"></strong><ul id="readiness-issues"></ul></div><p class="muted">تُعدّل المنتجات والأسعار والمقاسات والمحافظات ورسوم الشحن من الشيت الخاص بهذا المتجر. جميع المبالغ في الشيت بالقروش: 550 جنيهًا = 55000. الخادم يتحقق من الجاهزية عند كل طلب.</p></div>
       <form id="settings-form" class="panel"><h2>البراند والطلب المسبق</h2>
         <div class="settings-grid">
@@ -93,11 +143,11 @@ function options(el,map,empty){el.replaceChildren();if(empty){var any=node('opti
 options($('filter-status'),statuses,'كل الحالات');
 function renderReadiness(r){r=r||{ready:false,issues:['تعذر تحديد الجاهزية.']};$('readiness-box').classList.toggle('ready',!!r.ready);$('readiness-title').textContent=r.ready?'إعدادات البيع الحقيقي مكتملة حسب الفحص الحالي':'البيع الحقيقي غير جاهز';$('readiness-issues').replaceChildren();(r.issues||[]).forEach(function(issue){$('readiness-issues').append(node('li',issue));});}
 function renderSettings(s){s=s||{};settingsKeys.forEach(function(key){var el=$('s-'+key);if(boolKeys.indexOf(key)>=0)el.checked=isTrue(s[key]);else el.value=s[key]===undefined?'':String(s[key]);});}
-function render(data){state.data=data;$('actor').textContent=data.actor||'حساب معتمد';$('app').hidden=false;$('initial-loading').hidden=true;var summary=data.summary||{};var demo=$('filter-mode').value==='demo';$('mode-description').textContent=demo?'تعرض الآن بيانات تجريبية معزولة. مبالغها ليست مبيعات أو تحصيلًا حقيقيًا.':'تعرض الآن بيانات الطلبات الحقيقية فقط. أوقات الطلبات بتوقيت القاهرة.';$('metric-orders').textContent=num(summary.order_count);$('metric-units').textContent=num(summary.unit_count)+' قطعة';$('metric-value').textContent=money(summary.order_value_minor);$('metric-collected').textContent=money(summary.collected_minor);$('metric-refunded').textContent='المسترد: '+money(summary.refunded_minor);$('metric-net').textContent=money(summary.net_collected_minor);$('pending-box').hidden=!(Number(data.pending_count)>0);$('pending-count').textContent=num(data.pending_count)+' عملية تحتاج المراجعة';var rows=$('order-rows');rows.replaceChildren();var orders=data.orders||[];orders.forEach(function(o){var tr=node('tr');var idCell=node('td');var button=node('button',o.id,'order-link');button.type='button';button.addEventListener('click',function(){openOrder(o.id);});idCell.append(button,node('div',date(o.created_at),'muted'));tr.append(idCell);var customer=node('td');customer.append(node('div',o.customer_name),node('div',o.phone,'muted ltr'));tr.append(customer);tr.append(node('td',statuses[o.order_status]||o.order_status),node('td',payments[o.payment_status]||o.payment_status),node('td',money(o.total_minor)),node('td',money(Number(o.collected_minor||0)-Number(o.refunded_minor||0))));rows.append(tr);});$('empty-orders').hidden=orders.length!==0;$('result-count').textContent=num(orders.length)+' من '+num(data.matched_count===undefined?orders.length:data.matched_count)+' نتيجة'+(Number(data.matched_count)>200?'؛ ابحث أو صفِّ لتضييق القائمة':'');var variants=summary.by_variant||[];$('variant-rows').replaceChildren();variants.forEach(function(v){var tr=node('tr');tr.append(node('td',v.color_label||v.color),node('td',v.size),node('td',num(v.quantity)));$('variant-rows').append(tr);});$('empty-variants').hidden=variants.length!==0;renderReadiness(data.readiness);renderSettings(data.settings);}
+function render(data){state.data=data;$('actor').textContent=data.actor||'حساب معتمد';$('app').hidden=false;$('initial-loading').hidden=true;var summary=data.summary||{};var demo=$('filter-mode').value==='demo';$('mode-description').textContent=demo?'تعرض الآن بيانات تجريبية معزولة. مبالغها ليست مبيعات أو تحصيلًا حقيقيًا.':'تعرض الآن بيانات الطلبات الحقيقية فقط. أوقات الطلبات بتوقيت القاهرة.';$('metric-orders').textContent=num(summary.order_count);$('metric-units').textContent=num(summary.unit_count)+' قطعة';$('metric-value').textContent=money(summary.order_value_minor);$('metric-collected').textContent=money(summary.collected_minor);$('metric-refunded').textContent='المسترد: '+money(summary.refunded_minor);$('metric-net').textContent=money(summary.net_collected_minor);$('pending-box').hidden=!(Number(data.pending_count)>0);$('pending-count').textContent=num(data.pending_count)+' عملية تحتاج المراجعة';var rows=$('order-rows');rows.replaceChildren();var orders=data.orders||[];orders.forEach(function(o){var tr=node('tr');var idCell=node('td');var button=node('button',o.id,'order-link');button.type='button';button.addEventListener('click',function(){openOrder(o.id);});idCell.append(button,node('div',date(o.created_at),'muted'));tr.append(idCell);var customer=node('td');customer.append(node('div',o.customer_name),node('div',o.phone,'muted ltr'));tr.append(customer);tr.append(node('td',statuses[o.order_status]||o.order_status),node('td',payments[o.payment_status]||o.payment_status),node('td',money(o.total_minor)),node('td',money(Number(o.collected_minor||0)-Number(o.refunded_minor||0))));rows.append(tr);});$('empty-orders').hidden=orders.length!==0;$('result-count').textContent=num(orders.length)+' من '+num(data.matched_count===undefined?orders.length:data.matched_count)+' نتيجة'+(Number(data.matched_count)>200?'؛ ابحث أو صفِّ لتضييق القائمة':'');var variants=summary.by_variant||[];$('variant-rows').replaceChildren();variants.forEach(function(v){var tr=node('tr');tr.append(node('td',v.color_label||v.color),node('td',v.size),node('td',num(v.quantity)));$('variant-rows').append(tr);});$('empty-variants').hidden=variants.length!==0;renderReadiness(data.readiness);renderSettings(data.settings);renderAppearance(data.appearance||{});}
 async function loadData(quiet){var seq=++state.requestNo;$('refresh').disabled=true;try{var data=await rpc('getAdminDashboard',{search:$('filter-search').value.trim(),status:$('filter-status').value,mode:$('filter-mode').value});if(seq!==state.requestNo)return;render(data);if(!quiet)notice('');}catch(err){if(seq!==state.requestNo)return;notice(err.message,'error');$('initial-loading').hidden=true;}finally{if(seq===state.requestNo)$('refresh').disabled=false;}}
 $('filters').addEventListener('submit',function(e){e.preventDefault();loadData(false);});$('filter-mode').addEventListener('change',function(){loadData(false);});$('filter-status').addEventListener('change',function(){loadData(false);});
-function tab(which){['orders','settings'].forEach(function(k){$(k+'-tab').setAttribute('aria-selected',String(k===which));$(k+'-view').hidden=k!==which;});}
-$('orders-tab').addEventListener('click',function(){tab('orders');});$('settings-tab').addEventListener('click',function(){tab('settings');});
+function tab(which){['orders','appearance','settings'].forEach(function(k){$(k+'-tab').setAttribute('aria-selected',String(k===which));$(k+'-view').hidden=k!==which;});}
+$('orders-tab').addEventListener('click',function(){tab('orders');});$('appearance-tab').addEventListener('click',function(){tab('appearance');});$('settings-tab').addEventListener('click',function(){tab('settings');});
 $('settings-form').addEventListener('submit',async function(e){e.preventDefault();if(state.busy)return;var values={};settingsKeys.forEach(function(k){var el=$('s-'+k);values[k]=boolKeys.indexOf(k)>=0?el.checked:numberKeys.indexOf(k)>=0?Number(el.value):el.value.trim();});if(!values.test_mode&&values.orders_open&&!window.confirm('سيؤدي الحفظ إلى طلب فتح البيع الحقيقي عند اجتياز فحص الخادم. هل راجعت الأسعار والشحن والمواعيد وطريقة الدفع والبيانات الحقيقية؟'))return;state.busy=true;$('save-settings').disabled=true;$('settings-save-status').textContent='جارٍ الحفظ…';try{var result=await rpc('adminUpdateSettings',{values:values});renderSettings(result.settings);renderReadiness(result.readiness);$('settings-save-status').textContent='تم حفظ الإعدادات.';notice('تم حفظ إعدادات المتجر.','success');await loadData(true);}catch(err){$('settings-save-status').textContent='لم يتم تأكيد الحفظ.';notice(err.message,'error');}finally{state.busy=false;$('save-settings').disabled=false;}});
 $('recover').addEventListener('click',async function(){if(state.busy)return;state.busy=true;$('recover').disabled=true;try{var result=await rpc('adminRecoverPending');notice('اكتمل فحص العمليات. عدد العمليات المعالجة: '+num(result.recovered),'success');await loadData(true);}catch(err){notice(err.message,'error');}finally{state.busy=false;$('recover').disabled=false;}});
 function detailPair(dl,label,value){dl.append(node('dt',label),node('dd',value===undefined||value===''?'—':value));}
@@ -118,6 +168,52 @@ async function openOrder(id){state.lastFocus=document.activeElement;$('order-mod
 async function mutateOrder(name,payload,button){if(state.busy)return;state.busy=true;button.disabled=true;notice('جارٍ حفظ التحديث…','','detail-notice');try{var data=await rpc(name,payload);if(name==='adminRecordPayment')clearPaymentPending(payload.order_id);renderOrder(data);notice('تم حفظ التحديث.','success','detail-notice');await loadData(true);}catch(err){notice(err.message,'error','detail-notice');if(name==='adminRecordPayment'){var reviewButton=node('button','تحديث التفاصيل ومراجعة النتيجة','btn secondary small');reviewButton.type='button';reviewButton.style.marginTop='10px';reviewButton.addEventListener('click',function(){openOrder(payload.order_id);});$('detail-notice').append(node('br'),reviewButton);}}finally{state.busy=false;button.disabled=false;}}
 function closeModal(){if(state.busy)return;$('order-modal').hidden=true;document.body.style.overflow='';state.order=null;if(state.lastFocus&&document.contains(state.lastFocus))state.lastFocus.focus();else $('refresh').focus();}
 $('close-modal').addEventListener('click',closeModal);$('order-modal').addEventListener('click',function(e){if(e.target===$('order-modal'))closeModal();});document.addEventListener('keydown',function(e){if($('order-modal').hidden)return;if(e.key==='Escape')closeModal();if(e.key==='Tab'){var all=Array.from($('order-modal').querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex="0"]')).filter(function(el){return el.offsetParent!==null;});if(!all.length)return;var first=all[0],last=all[all.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+
+var appearanceKeys=['hero_title','hero_kicker','hero_button','hero_image_url','editorial_image_url','theme','scroll_animation','announcement_text','section_label','footer_note'];
+var appearanceState={loaded:false};
+function renderAppearance(a){
+ if(!appearanceState.loaded){
+  appearanceKeys.forEach(function(k){var field=$('a-'+k);if(field)field.value=a[k]===undefined?'':String(a[k]);});
+  appearanceState.loaded=true;
+ }
+ previewAppearance();
+}
+function previewAppearance(){
+ var get=function(k){return $('a-'+k).value;},theme=get('theme'),
+ schemes={editorial:['#d98b32','#f7eeeb','#632333'],minimal:['#b2b2ac','#fafaf8','#222222'],dark:['#514138','#26211f','#f2e7da']},c=schemes[theme]||schemes.editorial;
+ $('appearance-preview').style.cssText='border-color:'+c[0]+';background:'+c[1]+';color:'+c[2];
+ $('ap-brand').textContent=$('s-brand_name').value||'BRAND NAME';
+ $('ap-title').textContent=get('hero_title')||'The New Collection.';
+ $('ap-kicker').textContent=get('hero_kicker');
+ $('ap-button').textContent=get('hero_button')||'Explore the drop';
+ $('ap-button').style.background=theme==='dark'?'#9c6c5e':c[2];
+ var url=get('hero_image_url'),photo=$('ap-photo');
+ if(/^https:\/\//i.test(url)){photo.style.backgroundImage='url("'+url.replace(/["\\()]/g,encodeURIComponent)+'")';photo.firstElementChild.hidden=true;}
+ else{photo.style.backgroundImage='';photo.firstElementChild.hidden=false;}
+}
+appearanceKeys.forEach(function(k){$('a-'+k).addEventListener('input',previewAppearance);$('a-'+k).addEventListener('change',previewAppearance);});
+$('appearance-form').addEventListener('submit',async function(e){
+ e.preventDefault();if(state.busy)return;
+ var values={};appearanceKeys.forEach(function(k){values[k]=$('a-'+k).value.trim();});
+ state.busy=true;$('save-appearance').disabled=true;$('appearance-save-status').textContent='Saving…';
+ try{var result=await rpc('adminSaveAppearance',{values:values});$('appearance-save-status').textContent='Published. Refresh the storefront to see changes.';notice('Website appearance published.','success');}
+ catch(err){$('appearance-save-status').textContent='Could not confirm save.';notice(err.message,'error');}
+ finally{state.busy=false;$('save-appearance').disabled=false;}
+});
+$('upload-appearance').addEventListener('click',async function(){
+ var file=$('appearance-upload').files[0];if(!file){$('appearance-upload-status').textContent='Select an image first.';return;}
+ if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>2000000){$('appearance-upload-status').textContent='Use JPG, PNG or WebP under 2MB.';return;}
+ if(state.busy)return;
+ state.busy=true;$('upload-appearance').disabled=true;$('appearance-upload-status').textContent='Uploading public photo…';
+ try{
+  var b64=await new Promise(function(resolve,reject){var rd=new FileReader();rd.onload=function(){resolve(String(rd.result).split(',')[1])};rd.onerror=reject;rd.readAsDataURL(file)});
+  var result=await rpc('adminUploadAppearanceImage',{mime:file.type,base64:b64});
+  $('a-hero_image_url').value=result.url;previewAppearance();
+  $('appearance-upload-status').textContent='Uploaded. Click Save & publish appearance to use this image. Test the image from an unsigned-in browser.';
+ }catch(err){$('appearance-upload-status').textContent=err.message||'Upload failed.';}
+ finally{state.busy=false;$('upload-appearance').disabled=false;}
+});
+
 loadData(false);
 })();
 </script>
