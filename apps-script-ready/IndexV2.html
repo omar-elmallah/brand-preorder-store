@@ -288,12 +288,12 @@ h1 span{color:#8e3943}
     catalog.product = catalog.product || { id: '', name: 'Product setup in progress', description: 'Product details are not complete yet.', material: '', fit: '', images: [], is_demo: true };
     catalog.variants = catalog.variants || []; catalog.shipping = catalog.shipping || []; catalog.sizeGuide = catalog.sizeGuide || [];
     catalog.readiness = catalog.readiness || { ready: false, issues: [] };
-    state.catalog = catalog; window.dispatchEvent(new CustomEvent('store:appearance',{detail:catalog.appearance||{}}));
+    state.catalog = catalog;
     var maxQuantity = Number(catalog.checkout && catalog.checkout.max_order_qty);
     $('quantity').max = String(Number.isInteger(maxQuantity) && maxQuantity > 0 ? maxQuantity : 5);
     if (quantity() > Number($('quantity').max)) $('quantity').value = $('quantity').max;
     var settings = catalog.settings; var demo = truth(settings.test_mode);
-    document.title = settings.brand_name + ' | Pre-order'; setText('navBrand', settings.brand_name); setText('footerBrand', settings.brand_name);
+    document.title = settings.brand_name + ' | Pre-order'; setText('navBrand', 'G'); setText('footerBrand', settings.brand_name);
     setText('modeBanner', demo ? 'Demo mode — sample prices and measurements only. Real orders are disabled..' : 'Pre-order — Review expected dispatch and delivery before ordering.');
     setText('brandDescription', settings.brand_description); setText('productTitle', catalog.product.name); setText('productDescription', catalog.product.description);
     setText('material', catalog.product.material || 'To be confirmed'); setText('fit', catalog.product.fit || 'To be confirmed');
@@ -327,6 +327,7 @@ h1 span{color:#8e3943}
     $('orderFields').disabled = !isOpen() || state.busy || !!state.pending;
     $('loadError').hidden = true;
     updateSummary();
+    window.dispatchEvent(new CustomEvent('store:appearance',{detail:catalog.appearance||{}}));
   }
   function loadCatalog() {
     $('reloadCatalog').disabled = true;
