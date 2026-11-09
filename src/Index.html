@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#651e32">
+  <title>BRAND NAME | طلب مسبق</title>
+  <?!= include_('Styles'); ?>
+</head>
+<body>
+  <div class="announcement" id="modeBanner" role="status">جارٍ تحميل المتجر…</div>
+  <header class="site-header shell">
+    <a href="#" class="brand" aria-label="الصفحة الرئيسية" id="navBrand">BRAND NAME</a>
+    <nav aria-label="القائمة الرئيسية"><a href="#product">القطعة</a><a href="#size-guide">المقاسات</a><a href="#policies">التفاصيل</a></nav>
+    <a class="header-cta" href="#order">ابدأ طلبك <span aria-hidden="true">↙</span></a>
+  </header>
+  <main>
+    <section class="hero shell" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="tiny-line"></span> البداية بقطعة واحدة</span>
+        <h1 id="heroTitle">حضور هادي.<br><span>ستايل يشبهك.</span></h1>
+        <p id="brandDescription">سويت شيرت، لونين، وتفاصيل نجهزها على مهل. اكتشف أول قطعة من BRAND NAME.</p>
+        <a href="#order" class="button primary">اختار قطعتك <span aria-hidden="true">↙</span></a>
+        <div class="hero-note"><span aria-hidden="true">◷</span><span>هذه القطعة متاحة بنظام الطلب المسبق</span></div>
+      </div>
+      <div class="hero-art" aria-labelledby="illustrationCaption">
+        <div class="art-topline"><span>THE FIRST PIECE</span><span>01 / 01</span></div>
+        <svg id="sweatshirt" viewBox="0 0 660 620" role="img" aria-label="رسم توضيحي لسويت شيرت؛ ليس صورة المنتج الحقيقي">
+          <defs><linearGradient id="fabric" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#822b44"/><stop offset="1" stop-color="#501627"/></linearGradient><filter id="shadow" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-opacity=".15"/></filter></defs>
+          <ellipse cx="334" cy="555" rx="184" ry="21" fill="#000" opacity=".05"/>
+          <g filter="url(#shadow)">
+            <path class="garment" d="M242 120 190 140 141 177 75 363 135 391 211 253 205 498Q330 526 455 498L449 253 525 391 585 363 519 177 470 140 418 120Q386 154 330 154T242 120Z" fill="url(#fabric)"/>
+            <path d="M242 120Q265 196 330 196T418 120L390 108Q330 151 270 108Z" fill="#481322"/>
+            <path d="M270 108Q330 151 390 108" fill="none" stroke="#a15066" stroke-width="4" opacity=".55"/>
+            <path d="M205 471Q330 493 455 471L455 498Q330 526 205 498Z" fill="#471523"/>
+            <path d="M75 363 135 391 122 414 64 386Z M525 391 585 363 596 386 538 414Z" fill="#471523"/>
+            <path d="M194 160 212 250 M466 160 448 250 M220 259 219 457 M440 259 441 457" stroke="#ab5a70" stroke-width="2" fill="none" opacity=".3"/>
+            <path d="M244 209Q330 221 416 209" stroke="#fff" opacity=".025" stroke-width="65" fill="none"/>
+            <text x="330" y="270" fill="#f4eae0" font-family="Arial,sans-serif" font-size="10" letter-spacing="4" text-anchor="middle" opacity=".7">BRAND NAME</text>
+          </g>
+        </svg>
+        <div class="art-bottomline"><span id="artColor">برجندي</span><span>BLACK / BURGUNDY</span></div>
+        <p id="illustrationCaption" class="art-disclaimer">رسم توضيحي مؤقت — ليس صورة المنتج الحقيقي</p>
+      </div>
+    </section>
+    <div class="detail-strip"><div class="shell"><span>قطعة واحدة. اختيارات بسيطة.</span><span>أسود + برجندي</span><span>طلب مسبق · تفاصيل واضحة</span></div></div>
+    <div id="loadError" class="shell" role="alert" hidden><div class="notice error"><p id="loadErrorText"></p><button type="button" id="reloadCatalog" class="button secondary">إعادة المحاولة</button></div></div>
+    <section id="product" class="product-section shell" aria-labelledby="productTitle">
+      <div><span class="eyebrow">01 — القطعة</span><h2 id="productTitle">السويت شيرت الأول</h2><p id="productDescription" class="section-lead">جارٍ تحميل تفاصيل القطعة…</p><div class="product-facts"><div><span class="muted">الخامة</span><p id="material">لم تُعتمد بعد</p></div><div><span class="muted">القَصّة</span><p id="fit">لم تُعتمد بعد</p></div></div></div>
+      <div class="product-aside"><span class="eyebrow">PRE-ORDER</span><h3>قطعتك تُجهَّز بعد طلبك.</h3><p id="preorderMessage">اطّلع على موعد الشحن المتوقع ومدة التوصيل قبل تأكيد الطلب.</p><div class="timing"><span>الشحن المتوقع من المتجر</span><strong id="shippingExpected">لم يُحدد بعد</strong><span>مدة التوصيل بعد الشحن</span><strong id="deliveryExpected">تظهر عند اختيار المحافظة</strong></div></div>
+      <div id="productGallery" class="product-gallery" hidden></div>
+    </section>
+    <section id="order" class="order-section shell" aria-labelledby="orderTitle">
+      <div class="section-heading"><div><span class="eyebrow">02 — طلبك</span><h2 id="orderTitle">اختار اللي يشبهك.</h2></div><p>اختيار القطعة وبيانات التوصيل، في خطوة واحدة.</p></div>
+      <div id="launchNotice" class="notice" role="status" hidden></div>
+      <form id="orderForm" novalidate>
+        <fieldset id="orderFields" disabled>
+          <div class="checkout-grid">
+            <div class="checkout-main">
+              <div class="form-card choices-card">
+                <div class="card-heading"><span class="step-number">١</span><h3>القطعة</h3></div>
+                <label class="field-label" id="colorLabel">اللون <span id="colorName" class="muted"></span></label><div id="colorOptions" class="color-options" role="group" aria-labelledby="colorLabel"></div>
+                <div class="size-label"><span class="field-label" id="sizeLabel">المقاس</span><a href="#size-guide">دليل المقاسات ↙</a></div><div id="sizeOptions" class="size-options" role="group" aria-labelledby="sizeLabel"></div>
+                <p id="selectionStatus" class="field-help" role="status"></p>
+                <label for="quantity" class="field-label">الكمية</label><div class="quantity-control"><button type="button" id="decreaseQuantity" aria-label="تقليل الكمية">−</button><input id="quantity" name="quantity" type="number" value="1" min="1" max="5" inputmode="numeric" required><button type="button" id="increaseQuantity" aria-label="زيادة الكمية">+</button></div>
+              </div>
+              <div class="form-card">
+                <div class="card-heading"><span class="step-number">٢</span><h3>بيانات التوصيل</h3></div><p class="field-help">لا تحتاج إنشاء حساب. نستخدم بياناتك لمتابعة الطلب وتوصيله.</p>
+                <div class="fields-grid">
+                  <div class="field"><label for="customerName">الاسم بالكامل</label><input id="customerName" name="name" autocomplete="name" minlength="2" maxlength="100" required placeholder="اسم المستلم"></div>
+                  <div class="field"><label for="phone">رقم الموبايل</label><input id="phone" name="phone" type="tel" dir="ltr" autocomplete="tel" maxlength="20" required placeholder="01xxxxxxxxx"><span class="field-help">رقم موبايل مصري للتواصل بشأن الطلب</span></div>
+                  <div class="field"><label for="governorate">المحافظة</label><select id="governorate" name="governorate" required><option value="">اختار المحافظة</option></select></div>
+                  <div class="field"><label for="city">المدينة / المنطقة</label><input id="city" name="city" autocomplete="address-level2" minlength="2" maxlength="100" required placeholder="المدينة أو المنطقة"></div>
+                  <div class="field span-full"><label for="address">العنوان التفصيلي</label><textarea id="address" name="address" autocomplete="street-address" rows="2" minlength="8" maxlength="500" required placeholder="الشارع، رقم المبنى، الدور والشقة، وعلامة مميزة"></textarea></div>
+                  <div class="field span-full"><label for="notes">ملاحظات <span class="muted">(اختياري)</span></label><textarea id="notes" name="notes" rows="2" maxlength="500" placeholder="أي تفاصيل تساعدنا في توصيل طلبك"></textarea></div>
+                </div>
+                <div class="honeypot" aria-hidden="true"><label for="website">اترك هذا الحقل فارغًا</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+              </div>
+            </div>
+            <aside class="order-summary form-card" aria-labelledby="summaryTitle">
+              <span class="eyebrow">YOUR FIRST PIECE</span><h3 id="summaryTitle">ملخص طلبك</h3>
+              <div class="summary-product"><div class="mini-swatch" id="summarySwatch"></div><div><strong id="summaryName">السويت شيرت الأول</strong><span id="summaryVariant" class="muted">اختار اللون والمقاس</span></div></div>
+              <dl class="summary-lines"><div><dt>قيمة القطع</dt><dd id="subtotal">—</dd></div><div><dt>الشحن</dt><dd id="shippingFee">اختار المحافظة</dd></div><div class="summary-total"><dt>الإجمالي</dt><dd id="total">—</dd></div></dl>
+              <div class="summary-preorder"><strong>هذا طلب مسبق</strong><p id="summaryShipping">موعد الشحن لم يُحدد بعد.</p><p id="summaryDelivery">مدة التوصيل تظهر بعد اختيار المحافظة.</p></div>
+              <p id="paymentDescription" class="field-help"></p>
+              <p class="field-help">تأكيد الطلب يعني إرسال طلبك للمتجر. لا يتم تحصيل أي مبلغ من هذه الصفحة.</p>
+              <button type="submit" id="submitOrder" class="button primary full-width">إرسال طلب تجريبي <span aria-hidden="true">↙</span></button>
+            </aside>
+          </div>
+        </fieldset>
+        <div id="submitStatus" class="notice" role="status" tabindex="-1" hidden></div>
+        <div id="retryActions" class="retry-actions" hidden><button id="retryOrder" type="button" class="button primary">إعادة إرسال نفس الطلب</button><button id="differentOrder" type="button" class="button secondary">بدء طلب مختلف</button></div>
+      </form>
+      <section id="successPanel" class="success-panel" tabindex="-1" hidden aria-labelledby="successTitle"><span class="success-icon" aria-hidden="true">✓</span><span class="eyebrow" id="successMode">طلب تجريبي</span><h2 id="successTitle">وصلنا طلبك.</h2><p id="successDescription"></p><p class="order-number"><span>رقم الطلب</span><strong id="successOrderId" dir="ltr"></strong></p><p id="successTotal"></p><p class="field-help">احتفظ برقم الطلب للمتابعة. الطلب لا يعني أن الدفع تم تحصيله.</p><button id="newOrder" type="button" class="button secondary">طلب جديد</button></section>
+    </section>
+    <section id="size-guide" class="size-section shell" aria-labelledby="sizeTitle"><div><span class="eyebrow">03 — المقاس المناسب</span><h2 id="sizeTitle">اختار مقاسك براحة.</h2><p class="muted" id="guideNote">قياسات توضيحية للتجربة؛ يجب اعتماد جدول المنتج الحقيقي قبل البيع.</p></div><div class="table-scroll"><table><caption class="sr-only">جدول المقاسات بالسنتيمتر</caption><thead><tr><th scope="col">المقاس</th><th scope="col">الصدر (سم)</th><th scope="col">الطول (سم)</th><th scope="col">الكم (سم)</th><th scope="col">ملاحظات</th></tr></thead><tbody id="sizeGuideBody"></tbody></table></div></section>
+    <section id="policies" class="policies-section shell" aria-labelledby="policiesTitle"><span class="eyebrow">04 — التفاصيل تفرق</span><h2 id="policiesTitle">قبل ما تطلب.</h2><div class="policy-grid"><details><summary>الشحن والتوصيل <span aria-hidden="true">+</span></summary><p id="shippingPolicy">سياسة الشحن لم تُعتمد بعد.</p></details><details><summary>الاستبدال <span aria-hidden="true">+</span></summary><p id="exchangePolicy">سياسة الاستبدال لم تُعتمد بعد.</p></details><details><summary>الاسترجاع <span aria-hidden="true">+</span></summary><p id="returnPolicy">سياسة الاسترجاع لم تُعتمد بعد.</p></details></div><div class="contact-row"><span>لديك استفسار؟</span><div id="contactLinks"><span class="muted">بيانات التواصل لم تُحدد بعد.</span></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="shell"><a href="#" class="brand" id="footerBrand">BRAND NAME</a><span>قطعة أولى. بداية جديدة.</span><a href="#order">اطلب قطعتك ↖</a></div></footer>
+  <?!= include_('Storefront'); ?>
+</body>
+</html>

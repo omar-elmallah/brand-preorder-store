@@ -1,0 +1,15 @@
+{
+  "name": "independent-brand-preorder-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arabic Apps Script + Sheets preorder MVP. No production dependencies.",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "preview": "node tools/preview.cjs",
+    "check": "node tools/check.cjs",
+    "test:browser": "node tools/browser-check.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

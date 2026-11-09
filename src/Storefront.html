@@ -1,0 +1,227 @@
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { catalog: null, color: '', size: '', busy: false, pending: null, checkoutStarted: false, key: '', lastReceipt: null, utm: {} };
+  var safeRejected = ['VALIDATION', 'PHONE_INVALID', 'UNAVAILABLE', 'CAPACITY', 'LAUNCH_NOT_READY', 'ORDERS_CLOSED', 'BOT_REJECTED', 'CHECKOUT_EXPIRED', 'TOO_FAST', 'RATE_LIMIT'];
+  var money = function (minor) { return new Intl.NumberFormat('ar-EG', { style: 'currency', currency: 'EGP', maximumFractionDigits: 2 }).format(Number(minor || 0) / 100); };
+  var truth = function (value) { return value === true || value === 'true' || value === 'TRUE'; };
+  function storageGet(key) { try { return sessionStorage.getItem(key); } catch (_) { return null; } }
+  function storageSet(key, value) { try { sessionStorage.setItem(key, value); } catch (_) {} }
+  function storageRemove(key) { try { sessionStorage.removeItem(key); } catch (_) {} }
+  function freshKey() {
+    if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+    var bytes = new Uint8Array(24); window.crypto.getRandomValues(bytes);
+    return Array.from(bytes, function (v) { return v.toString(16).padStart(2, '0'); }).join('');
+  }
+  function currentKey() { if (!state.key) { state.key = storageGet('brand-store:order-key') || freshKey(); storageSet('brand-store:order-key', state.key); } return state.key; }
+  function rotateKey() { state.key = freshKey(); storageSet('brand-store:order-key', state.key); storageRemove('brand-store:pending'); }
+  function setText(id, value) { $(id).textContent = value == null ? '' : String(value); }
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function element(tag, className, value) { var node = document.createElement(tag); if (className) node.className = className; if (value != null) node.textContent = String(value); return node; }
+  function api(name, payload) {
+    var operation;
+    if (window.StoreTransport && typeof window.StoreTransport.request === 'function') {
+      operation = window.StoreTransport.request(name, payload);
+    } else if (window.google && google.script && google.script.run) {
+      operation = new Promise(function (resolve, reject) {
+        var runner = google.script.run.withSuccessHandler(resolve).withFailureHandler(function () { reject({ code: 'TRANSPORT', message: 'تعذّر التأكد من نتيجة الإرسال. أعد المحاولة بنفس الطلب.' }); });
+        if (payload === undefined) runner[name](); else runner[name](payload);
+      });
+    } else {
+      return Promise.reject({ code: 'TRANSPORT', message: 'هذه الصفحة تحتاج تشغيلها من نشر Google Apps Script، أو من خادم المعاينة المحلي المرفق.' });
+    }
+    return Promise.resolve(operation).then(function (result) {
+      if (!result || result.ok !== true) throw (result && result.error) || { code: 'TRANSPORT', message: 'تعذّر التحقق من استجابة المتجر.' };
+      return result.data;
+    });
+  }
+  function emit(name, extra) {
+    var detail = { event: name, currency: 'EGP', mode: state.catalog && truth(state.catalog.settings.test_mode) ? 'demo' : 'live' };
+    Object.keys(extra || {}).forEach(function (key) { detail[key] = extra[key]; });
+    window.dispatchEvent(new CustomEvent('store:analytics', { detail: detail }));
+  }
+  function selectedVariant() {
+    if (!state.catalog) return null;
+    return state.catalog.variants.find(function (variant) { return variant.color === state.color && variant.size === state.size; }) || null;
+  }
+  function variantAvailable(variant) { return variant && truth(variant.active) && variant.available !== false && variant.available !== 'false'; }
+  function selectedShipping() { return state.catalog && state.catalog.shipping.find(function (row) { return row.id === $('governorate').value; }); }
+  function quantity() { var value = Number($('quantity').value); return Number.isInteger(value) && value >= 1 ? value : 0; }
+  function isOpen() {
+    if (!state.catalog) return false;
+    return !!state.catalog.product.id && (truth(state.catalog.settings.test_mode) || (truth(state.catalog.settings.orders_open) && state.catalog.readiness.ready));
+  }
+  function setStatus(message, error) {
+    $('submitStatus').hidden = !message; $('submitStatus').classList.toggle('error', !!error); setText('submitStatus', message || '');
+    if (message) $('submitStatus').focus({ preventScroll: true });
+  }
+  function renderChoices() {
+    var catalog = state.catalog;
+    var colors = []; catalog.variants.forEach(function (v) { if (!colors.some(function (c) { return c.color === v.color; })) colors.push(v); });
+    if (!colors.some(function (c) { return c.color === state.color; })) state.color = colors.length ? colors[0].color : '';
+    clear($('colorOptions'));
+    colors.forEach(function (v) {
+      var button = element('button', 'color-button'); button.type = 'button'; button.setAttribute('aria-pressed', String(state.color === v.color));
+      var dot = element('span', 'color-dot'); dot.style.background = v.color === 'black' ? '#242123' : '#651e32'; button.appendChild(dot); button.appendChild(element('span', '', v.color_label));
+      button.disabled = !catalog.variants.some(function (candidate) { return candidate.color === v.color && variantAvailable(candidate); });
+      button.addEventListener('click', function () { state.color = v.color; state.size = ''; renderChoices(); updateSummary(); beginCheckout(); });
+      $('colorOptions').appendChild(button);
+    });
+    var selectedColor = colors.find(function (c) { return c.color === state.color; });
+    setText('colorName', selectedColor ? selectedColor.color_label : ''); setText('artColor', selectedColor ? selectedColor.color_label : '');
+    var dark = state.color === 'black';
+    var stops = document.querySelectorAll('#fabric stop'); stops[0].setAttribute('stop-color', dark ? '#3b3739' : '#822b44'); stops[1].setAttribute('stop-color', dark ? '#171517' : '#501627');
+    $('summarySwatch').style.background = dark ? '#242123' : '#651e32';
+    var sizes = catalog.variants.filter(function (v) { return v.color === state.color; });
+    if (!sizes.some(function (v) { return v.size === state.size && variantAvailable(v); })) { var first = sizes.find(variantAvailable); state.size = first ? first.size : ''; }
+    clear($('sizeOptions'));
+    sizes.forEach(function (v) {
+      var button = element('button', 'size-button', v.size); button.type = 'button'; button.dir = 'ltr'; button.disabled = !variantAvailable(v); button.setAttribute('aria-pressed', String(state.size === v.size)); button.setAttribute('aria-label', 'مقاس ' + v.size + (button.disabled ? ' غير متاح' : ''));
+      button.addEventListener('click', function () { state.size = v.size; renderChoices(); updateSummary(); beginCheckout(); }); $('sizeOptions').appendChild(button);
+    });
+  }
+  function updateSummary() {
+    if (!state.catalog) return;
+    var variant = selectedVariant(); var ship = selectedShipping(); var qty = quantity();
+    var subtotal = variant && qty ? variant.price_minor * qty : null;
+    setText('summaryName', state.catalog.product.name); setText('summaryVariant', variant ? variant.color_label + ' / ' + variant.size + ' / الكمية: ' + (qty || '—') : 'اختار لونًا ومقاسًا متاحين');
+    setText('selectionStatus', variantAvailable(variant) ? 'السعر للقطعة: ' + money(variant.price_minor) : 'هذا الاختيار غير متاح حاليًا.');
+    setText('subtotal', subtotal == null ? '—' : money(subtotal)); setText('shippingFee', ship ? money(ship.fee_minor) : 'اختار المحافظة'); setText('total', subtotal != null && ship ? money(subtotal + ship.fee_minor) : '—');
+    var delivery = ship ? String(ship.delivery_days) : 'تظهر عند اختيار المحافظة';
+    setText('deliveryExpected', delivery); setText('summaryDelivery', ship ? 'مدة التوصيل بعد الشحن: ' + delivery : 'مدة التوصيل تظهر بعد اختيار المحافظة.');
+    $('submitOrder').disabled = state.busy || !isOpen() || !variantAvailable(variant) || !qty || !ship;
+  }
+  function safeImage(url) { try { var value = new URL(url); return value.protocol === 'https:' ? value.href : ''; } catch (_) { return ''; } }
+  function renderCatalog(catalog) {
+    var hasProduct = !!catalog.product;
+    catalog.product = catalog.product || { id: '', name: 'المنتج قيد الإعداد', description: 'تفاصيل المنتج لم تكتمل بعد.', material: '', fit: '', images: [], is_demo: true };
+    catalog.variants = catalog.variants || []; catalog.shipping = catalog.shipping || []; catalog.sizeGuide = catalog.sizeGuide || [];
+    catalog.readiness = catalog.readiness || { ready: false, issues: [] };
+    state.catalog = catalog;
+    var maxQuantity = Number(catalog.checkout && catalog.checkout.max_order_qty);
+    $('quantity').max = String(Number.isInteger(maxQuantity) && maxQuantity > 0 ? maxQuantity : 5);
+    if (quantity() > Number($('quantity').max)) $('quantity').value = $('quantity').max;
+    var settings = catalog.settings; var demo = truth(settings.test_mode);
+    document.title = settings.brand_name + ' | طلب مسبق'; setText('navBrand', settings.brand_name); setText('footerBrand', settings.brand_name);
+    setText('modeBanner', demo ? 'وضع تجريبي — الأسعار والقياسات للتجربة، ولا نستقبل طلبات بيع حقيقية.' : 'طلب مسبق — راجع موعد الشحن ومدة التوصيل قبل تأكيد طلبك.');
+    setText('brandDescription', settings.brand_description); setText('productTitle', catalog.product.name); setText('productDescription', catalog.product.description);
+    setText('material', catalog.product.material || 'لم تُعتمد بعد'); setText('fit', catalog.product.fit || 'لم تُعتمد بعد');
+    setText('preorderMessage', settings.preorder_message || 'هذا المنتج بنظام الطلب المسبق.'); setText('shippingExpected', settings.shipping_expected || 'لم يُحدد بعد');
+    setText('summaryShipping', 'الشحن المتوقع من المتجر: ' + (settings.shipping_expected || 'لم يُحدد بعد'));
+    setText('shippingPolicy', settings.shipping_policy || 'سياسة الشحن لم تُعتمد بعد.'); setText('exchangePolicy', settings.exchange_policy || 'سياسة الاستبدال لم تُعتمد بعد.'); setText('returnPolicy', settings.return_policy || 'سياسة الاسترجاع لم تُعتمد بعد.');
+    setText('guideNote', demo || truth(catalog.product.is_demo) ? 'قياسات توضيحية للتجربة؛ يجب اعتماد جدول المنتج الحقيقي قبل البيع.' : 'القياسات بالسنتيمتر. راجع ملاحظات كل مقاس قبل الاختيار.');
+    var paymentText = { demo: 'طريقة الدفع: وضع تجريبي، لا يتم تحصيل أموال.', cod: 'طريقة الدفع: الدفع عند الاستلام. لا يُعتبر إرسال الطلب دفعًا محصلًا.', manual_transfer: 'طريقة الدفع: تحويل يدوي، وفق تعليمات المتجر. تسجيل التحصيل من الإدارة فقط.' };
+    setText('paymentDescription', paymentText[settings.payment_method] || 'طريقة الدفع لم تُحدد بعد.');
+    clear($('contactLinks'));
+    var contactAdded = false;
+    var phone = String(settings.contact_phone || '').replace(/[\s()-]/g, '');
+    if (/^\+?[\d]{10,15}$/.test(phone)) { var phoneLink = element('a', '', 'اتصل بنا'); phoneLink.href = 'tel:' + phone; $('contactLinks').appendChild(phoneLink); contactAdded = true; }
+    var email = String(settings.contact_email || '');
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !/[\r\n]/.test(email)) { var emailLink = element('a', '', 'البريد الإلكتروني'); emailLink.href = 'mailto:' + encodeURIComponent(email); $('contactLinks').appendChild(emailLink); contactAdded = true; }
+    if (!contactAdded) $('contactLinks').appendChild(element('span', 'muted', 'بيانات التواصل لم تُحدد بعد.'));
+    clear($('sizeGuideBody'));
+    catalog.sizeGuide.forEach(function (row) { var tr = element('tr'); [row.size, row.chest_cm, row.length_cm, row.sleeve_cm, row.notes].forEach(function (value) { tr.appendChild(element('td', '', value)); }); $('sizeGuideBody').appendChild(tr); });
+    if (!catalog.sizeGuide.length) { var tr = element('tr'); var cell = element('td', '', 'جدول المقاسات لم يُحدد بعد.'); cell.colSpan = 5; tr.appendChild(cell); $('sizeGuideBody').appendChild(tr); }
+    var previousGov = $('governorate').value; clear($('governorate')); var placeholder = element('option', '', 'اختار المحافظة'); placeholder.value = ''; $('governorate').appendChild(placeholder);
+    catalog.shipping.forEach(function (row) { var option = element('option', '', row.governorate); option.value = row.id; $('governorate').appendChild(option); }); $('governorate').value = previousGov;
+    clear($('productGallery'));
+    (catalog.product.images || []).forEach(function (url) { var src = safeImage(url); if (!src) return; var figure = element('figure'); var img = element('img'); img.src = src; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer'; img.alt = catalog.product.name; figure.appendChild(img); figure.appendChild(element('figcaption', '', truth(catalog.product.is_demo) ? 'صورة بديلة للتجهيز — ليست توثيقًا للمنتج النهائي' : catalog.product.name)); $('productGallery').appendChild(figure); }); $('productGallery').hidden = !$('productGallery').children.length;
+    renderChoices();
+    var issues = (catalog.readiness.issues || []).join('\n• ');
+    if (!hasProduct) { $('launchNotice').hidden = false; setText('launchNotice', 'المنتج قيد الإعداد؛ استقبال الطلبات متوقف حتى تكتمل تفاصيل المنتج.' + (issues ? '\n• ' + issues : '')); }
+    else if (demo) { $('launchNotice').hidden = false; setText('launchNotice', 'أنت في وضع التجربة: يمكنك إرسال طلب تجريبي يظهر للإدارة منفصلًا عن الطلبات الحقيقية. لا يوجد تحصيل أموال أو التزام بتوصيل هذا الطلب.'); }
+    else if (!isOpen()) { $('launchNotice').hidden = false; setText('launchNotice', 'استقبال الطلبات الحقيقية متوقف حتى اكتمال إعدادات الإطلاق.' + (issues ? '\n• ' + issues : '')); }
+    else $('launchNotice').hidden = true;
+    setText('submitOrder', demo ? 'إرسال طلب تجريبي ↙' : 'تأكيد طلب مسبق ↙');
+    $('orderFields').disabled = !isOpen() || state.busy || !!state.pending;
+    $('loadError').hidden = true;
+    updateSummary();
+  }
+  function loadCatalog() {
+    $('reloadCatalog').disabled = true;
+    return api('getCatalog').then(function (catalog) {
+      renderCatalog(catalog); emit('view_item', { item_id: catalog.product.id });
+      if (storageGet('brand-store:pending') && !state.pending && !state.lastReceipt) {
+        setStatus('يوجد إرسال سابق لم نتأكد من نتيجته في هذه الجلسة. إذا أعدت إدخال نفس البيانات، سيمنع الخادم تكرار الطلب. لطلب مختلف استخدم زر «بدء طلب مختلف» بعد التأكد من الطلب السابق.', false);
+        $('retryActions').hidden = false; $('retryOrder').hidden = true;
+      }
+    }).catch(function (error) { $('loadError').hidden = false; setText('loadErrorText', error.message || 'تعذّر تحميل المتجر. أعد المحاولة.'); setText('modeBanner', 'تعذّر تحميل المتجر'); $('orderFields').disabled = true; }).finally(function () { $('reloadCatalog').disabled = false; });
+  }
+  function beginCheckout() {
+    if (state.checkoutStarted || !state.catalog) return; state.checkoutStarted = true;
+    emit('begin_checkout', { item_id: state.catalog.product.id });
+  }
+  function readUtm(getParameter) {
+    var result = {};
+    ['source', 'medium', 'campaign', 'term', 'content'].forEach(function (key) { result[key] = String(getParameter('utm_' + key) || '').slice(0, 150); });
+    return result;
+  }
+  function initializeAttribution() {
+    var params = new URLSearchParams(window.location.search);
+    state.utm = readUtm(function (key) { return params.get(key); });
+    // HTML Service runs in an iframe. Read only the approved campaign keys from the enclosing Apps Script URL.
+    if (window.google && google.script && google.script.url && google.script.url.getLocation) {
+      google.script.url.getLocation(function (location) {
+        var values = location && location.parameter || {};
+        state.utm = readUtm(function (key) { return values[key]; });
+      });
+    }
+  }
+  function getUtm() { return Object.assign({}, state.utm); }
+  function payloadFromForm() {
+    return { idempotency_key: currentKey(), checkout_token: state.catalog.checkout.token, honeypot: $('website').value, customer: { name: $('customerName').value.trim(), phone: $('phone').value.trim(), governorate_id: $('governorate').value, city: $('city').value.trim(), address: $('address').value.trim(), notes: $('notes').value.trim() }, items: [{ variant_id: selectedVariant().id, quantity: quantity() }], utm: getUtm() };
+  }
+  function normalizePhonePreview(value) {
+    var digits = value.replace(/[\s()-]/g, '').replace(/[٠-٩]/g, function (c) { return String(c.charCodeAt(0) - 1632); });
+    digits = digits.replace(/^\+20|^0020|^20/, '0'); return /^01[0125]\d{8}$/.test(digits);
+  }
+  function submit(payload) {
+    if (state.busy) return;
+    state.busy = true; state.pending = payload; storageSet('brand-store:pending', '1'); $('orderFields').disabled = true; $('retryOrder').disabled = true; $('differentOrder').disabled = true; $('retryActions').hidden = true;
+    setStatus('جارٍ حفظ طلبك… احتفظ بالصفحة مفتوحة.', false);
+    api('submitOrder', payload).then(function (receipt) {
+      state.lastReceipt = receipt; state.pending = null; storageRemove('brand-store:pending'); storageRemove('brand-store:order-key'); state.key = '';
+      $('orderForm').hidden = true; $('successPanel').hidden = false; setText('successOrderId', receipt.order_id); setText('successMode', receipt.mode === 'demo' ? 'طلب تجريبي' : 'طلب مسبق');
+      setText('successTitle', receipt.mode === 'demo' ? 'تم حفظ طلبك التجريبي.' : 'وصلنا طلبك.');
+      setText('successDescription', receipt.mode === 'demo' ? 'يمكن للإدارة مشاهدة هذا الطلب في قسم الطلبات التجريبية. لا توجد عملية شراء أو دفعة مالية.' : 'تم تسجيل طلبك المسبق. تابع تعليمات المتجر واحتفظ برقم الطلب للمتابعة.');
+      setText('successTotal', 'الإجمالي المسجل: ' + money(receipt.total_minor)); $('successPanel').focus();
+      emit('order_submitted', { item_id: state.catalog.product.id, value: receipt.total_minor / 100 });
+    }).catch(function (error) {
+      var definite = safeRejected.indexOf(error.code) !== -1;
+      if (definite) {
+        state.pending = null; storageRemove('brand-store:pending'); rotateKey();
+        setStatus(error.message || 'راجع بيانات الطلب ثم أعد الإرسال.', true);
+        if (error.code === 'CHECKOUT_EXPIRED') return loadCatalog();
+      } else {
+        setStatus((error.code === 'IDEMPOTENCY_CONFLICT' ? 'هذا المفتاح مرتبط بطلب ببيانات مختلفة. تأكد من الطلب السابق قبل بدء طلب جديد.' : 'لم نتمكن من التأكد من نتيجة الإرسال. قد يكون الطلب محفوظًا. أعد إرسال نفس الطلب؛ سيمنع الخادم تكراره.') + '\nلا تُرسل طلبًا جديدًا قبل التأكد من نتيجة الطلب الحالي.', true);
+        $('retryActions').hidden = false; $('retryOrder').hidden = error.code === 'IDEMPOTENCY_CONFLICT';
+      }
+    }).finally(function () {
+      state.busy = false; $('retryOrder').disabled = false; $('differentOrder').disabled = false;
+      $('orderFields').disabled = !isOpen() || !!state.pending; updateSummary();
+    });
+  }
+  $('orderForm').addEventListener('submit', function (event) {
+    event.preventDefault(); if (state.busy || !state.catalog || !isOpen() || !variantAvailable(selectedVariant())) return;
+    if (!$('orderForm').reportValidity()) return;
+    if (!normalizePhonePreview($('phone').value)) { setStatus('أدخل رقم موبايل مصري صحيح يبدأ بـ 010 أو 011 أو 012 أو 015.', true); $('phone').focus(); return; }
+    if (!Number.isInteger(Number($('quantity').value)) || !quantity()) { setStatus('أدخل كمية صحيحة تبدأ من قطعة واحدة.', true); return; }
+    beginCheckout(); submit(payloadFromForm());
+  });
+  $('orderForm').addEventListener('focusin', function (event) { if (event.target.matches('input,textarea,select')) beginCheckout(); });
+  $('governorate').addEventListener('change', updateSummary); $('quantity').addEventListener('input', updateSummary);
+  $('decreaseQuantity').addEventListener('click', function () { $('quantity').value = String(Math.max(1, quantity() - 1)); updateSummary(); });
+  $('increaseQuantity').addEventListener('click', function () { $('quantity').value = String(Math.min(Number($('quantity').max), quantity() + 1)); updateSummary(); });
+  $('retryOrder').addEventListener('click', function () { if (state.pending) submit(state.pending); });
+  $('differentOrder').addEventListener('click', function () {
+    if (!window.confirm('قد يكون الطلب السابق محفوظًا بالفعل. ابدأ طلبًا مختلفًا فقط بعد التأكد من نتيجته من الإدارة. هل تريد البدء بمفتاح جديد؟')) return;
+    state.pending = null; rotateKey(); $('retryActions').hidden = true; $('retryOrder').hidden = false; setStatus('', false); $('orderFields').disabled = !isOpen(); updateSummary();
+  });
+  $('newOrder').addEventListener('click', function () {
+    state.lastReceipt = null; state.checkoutStarted = false; rotateKey(); $('orderForm').reset(); $('successPanel').hidden = true; $('orderForm').hidden = false; $('retryActions').hidden = true; setStatus('', false); loadCatalog().then(function () { $('order').scrollIntoView({ behavior: 'smooth' }); });
+  });
+  $('reloadCatalog').addEventListener('click', loadCatalog);
+  initializeAttribution(); currentKey(); loadCatalog();
+}());
+</script>
