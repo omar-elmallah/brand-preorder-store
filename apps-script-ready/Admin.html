@@ -12,6 +12,18 @@
     @media(prefers-reduced-motion:no-preference){.btn,.tab{transition:background .15s,opacity .15s}.btn:hover{opacity:.85}}
   </style>
 <style>
+/* GENRAGE visual editor preview */
+.editor-preview{border:0!important;background:#f3f3f1!important;color:#111!important;border-radius:8px;overflow:hidden;min-height:330px}
+.editor-preview-top{text-align:center;font:700 28px Georgia,serif}
+.editor-preview-inner{display:block;position:relative;height:260px;padding:0}
+.editor-preview-inner>div:first-child{position:absolute;inset:30% 0 auto;text-align:center;z-index:1}
+.editor-preview-inner h3{font:900 clamp(37px,6vw,72px)/1 Arial Black,Arial,sans-serif;letter-spacing:-.08em;color:#111;margin:0;text-align:center}
+.editor-preview-inner small{display:none}
+.preview-cta{position:absolute;top:155px;left:13px;background:#111!important;border-radius:30px;font:10px Arial,sans-serif;color:white;padding:9px 11px}
+.editor-preview-photo{position:absolute;top:3%;bottom:0;left:31%;right:31%;z-index:2;background-color:transparent!important;background-size:contain;background-position:center bottom;pointer-events:none;min-height:0}
+.editor-preview-photo span{display:none}
+</style>
+<style>
 .editor-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.85fr);gap:25px;margin-top:22px}
 .editor-grid .settings-grid{grid-template-columns:1fr 1fr}
 .editor-grid .field.wide{grid-column:1/-1}
@@ -76,7 +88,7 @@
     <div class="media-uploader">
       <label for="appearance-upload"><strong>Upload your center model photo</strong> · JPG, PNG, WebP · up to 2MB</label>
       <input type="file" id="appearance-upload" accept="image/jpeg,image/png,image/webp">
-      <button type="button" class="btn secondary" id="upload-appearance">Upload center image</button>
+      <button type="button" class="btn secondary" id="upload-appearance">Upload center image</button><button type="button" class="btn secondary" id="upload-thumbnail">Use selected image as thumbnail</button>
       <p id="appearance-upload-status" class="muted" role="status"></p>
     </div>
     <div class="editor-actions"><button class="btn accent" type="submit" id="save-appearance">Save & publish appearance</button><span id="appearance-save-status" class="muted" role="status"></span></div>
@@ -212,6 +224,21 @@ $('upload-appearance').addEventListener('click',async function(){
   $('appearance-upload-status').textContent='Uploaded. Click Save & publish appearance to use this image. Test the image from an unsigned-in browser.';
  }catch(err){$('appearance-upload-status').textContent=err.message||'Upload failed.';}
  finally{state.busy=false;$('upload-appearance').disabled=false;}
+});
+
+
+$('upload-thumbnail').addEventListener('click',async function(){
+ var file=$('appearance-upload').files[0];
+ if(!file){$('appearance-upload-status').textContent='Select a thumbnail image first.';return;}
+ if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>2000000){$('appearance-upload-status').textContent='Use JPG, PNG or WebP under 2MB.';return;}
+ if(state.busy)return;state.busy=true;$('upload-thumbnail').disabled=true;
+ try{
+  var b64=await new Promise(function(resolve,reject){var reader=new FileReader();reader.onload=function(){resolve(String(reader.result).split(',')[1]);};reader.onerror=reject;reader.readAsDataURL(file);});
+  var response=await rpc('adminUploadAppearanceImage',{mime:file.type,base64:b64});
+  $('a-thumbnail_image_url').value=response.url;previewAppearance();
+  $('appearance-upload-status').textContent='Thumbnail uploaded. Click Save & publish appearance.';
+ }catch(err){$('appearance-upload-status').textContent=err.message||'Thumbnail upload failed.';}
+ finally{state.busy=false;$('upload-thumbnail').disabled=false;}
 });
 
 loadData(false);
