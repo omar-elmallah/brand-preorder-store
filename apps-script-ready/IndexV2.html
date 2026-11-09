@@ -355,6 +355,7 @@ h1 span{color:#8e3943}
     $('orderFields').disabled = !isOpen() || state.busy || !!state.pending;
     $('loadError').hidden = true;
     updateSummary();
+    window.dispatchEvent(new CustomEvent('store:catalog',{detail:{catalog:catalog,appearance:catalog.appearance||{}}}));
   }
   function loadCatalog() {
     $('reloadCatalog').disabled = true;
@@ -516,5 +517,49 @@ body.theme-dark .brand,body.theme-dark .hero h1,body.theme-dark .hero h1 span,bo
 .animation-off .hero-art svg{animation:none!important}
 </style>
 
+
+<script>
+(function(){
+  function get(id){return document.getElementById(id);}
+  function url(raw){try{var u=new URL(raw);return u.protocol==='https:'?u.href:'';}catch(e){return '';}}
+  function showProducts(event){
+    var detail=event.detail||{},catalog=detail.catalog||{},settings=catalog.settings||{},product=catalog.product||{},app=detail.appearance||{};
+    var variants=catalog.variants||[],grid=get('fe-grid'),msg=get('fe-grid-status');
+    if(!grid||!msg)return;
+    var image=url(app.editorial_image_url)||url((product.images||[])[1])||url((product.images||[])[0]);
+    if(image)get('fe-editorial-photo').style.backgroundImage='url('+JSON.stringify(image)+')';
+    grid.replaceChildren();
+    if(!product.id){msg.textContent='The collection is coming soon.';msg.hidden=false;return;}
+    var colors=[];
+    variants.forEach(function(v){if(!colors.some(function(item){return item.color===v.color;}))colors.push(v);});
+    if(!colors.length)colors=[{color:'',color_label:'Current release'}];
+    colors.forEach(function(v,index){
+      var card=document.createElement('article');card.className='fe-card';
+      var media=document.createElement('div');media.className='fe-card-photo';
+      var src=url((product.images||[])[index])||url((product.images||[])[0]);
+      if(src){var img=document.createElement('img');img.src=src;img.alt=String(product.name||'Collection piece');img.loading='lazy';media.appendChild(img);}
+      else{var placeholder=document.createElement('div');placeholder.className='fe-card-placeholder';placeholder.textContent='PRODUCT PHOTO COMING SOON';media.appendChild(placeholder);}
+      var info=document.createElement('div');info.className='fe-card-info';
+      var left=document.createElement('div');var name=document.createElement('div');name.className='fe-card-name';name.textContent=String(product.name||'Collection piece');
+      var color=document.createElement('div');color.className='fe-card-color';color.textContent=String(v.color_label||v.color||'');
+      left.append(name,color);
+      var price=document.createElement('div');price.className='fe-card-price';
+      var prices=variants.filter(function(q){return q.color===v.color&&q.active&&q.available!==false;}).map(function(q){return Number(q.price_minor);}).filter(function(n){return Number.isFinite(n)&&n>0;});
+      price.textContent=prices.length?new Intl.NumberFormat('en-EG',{style:'currency',currency:'EGP'}).format(Math.min.apply(null,prices)/100):'Unavailable';
+      info.append(left,price);
+      var action=document.createElement('a');action.href='#order';action.textContent='CHOOSE SIZE & ORDER';
+      var arrow=document.createElement('span');arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');action.append(arrow);
+      card.append(media,info,action);grid.append(card);
+    });
+    msg.hidden=true;
+  }
+  window.addEventListener('store:catalog',showProducts);
+  var button=get('fe-menu'),nav=get('fe-mobile');
+  if(button&&nav){
+    button.addEventListener('click',function(){nav.hidden=!nav.hidden;button.setAttribute('aria-expanded',String(!nav.hidden));});
+    nav.querySelectorAll('a').forEach(function(item){item.addEventListener('click',function(){nav.hidden=true;button.setAttribute('aria-expanded','false');});});
+  }
+})();
+</script>
 </body>
 </html>
