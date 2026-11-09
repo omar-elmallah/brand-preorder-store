@@ -89,7 +89,7 @@ h1 span{color:#8e3943}
         <h1 id="heroTitle">The New<br><span>Collection.</span></h1>
         <p id="brandDescription">An introduction to everyday essentials. Considered silhouettes. Uncomplicated style.</p>
         <a href="#order" class="button primary">Explore the drop <span aria-hidden="true">↙</span></a>
-        <div class="hero-note"><span aria-hidden="true">◷</span><span>هذه Collection Availableة بنظام الطلب المسبق</span></div>
+        <div class="hero-note"><span aria-hidden="true">◷</span><span>This collection is available for pre-order</span></div>
       </div>
       <div class="hero-art" aria-labelledby="illustrationCaption"><div class="hero-photo" id="heroPhoto" aria-hidden="true"></div>
         <div class="art-topline"><span>THE FIRST DROP</span><span>EDITORIAL / 01</span></div>
@@ -111,15 +111,15 @@ h1 span{color:#8e3943}
         <p id="illustrationCaption" class="art-disclaimer">Illustration placeholder — replace with actual product photography</p>
       </div>
     </section>
-    <div class="detail-strip"><div class="shell"><span>CURATED ESSENTIALS</span><span>أسود + Burgundy</span><span>THE FIRST DROP / PRE-ORDER</span></div></div>
+    <div class="detail-strip"><div class="shell"><span>CURATED ESSENTIALS</span><span>Black + Burgundy</span><span>THE FIRST DROP / PRE-ORDER</span></div></div>
     <div id="loadError" class="shell" role="alert" hidden><div class="notice error"><p id="loadErrorText"></p><button type="button" id="reloadCatalog" class="button secondary">Try again</button></div></div>
     <section id="product" class="product-section shell" aria-labelledby="productTitle">
-      <div><span class="eyebrow">01 — Collection</span><h2 id="productTitle">The Essential Sweatshirt</h2><p id="productDescription" class="section-lead">جارٍ تحميل تفاصيل Collection…</p><div class="product-facts"><div><span class="muted">Fabric</span><p id="material">To be confirmed</p></div><div><span class="muted">Fit</span><p id="fit">To be confirmed</p></div></div></div>
+      <div><span class="eyebrow">01 — Collection</span><h2 id="productTitle">The Essential Sweatshirt</h2><p id="productDescription" class="section-lead">Loading details Collection…</p><div class="product-facts"><div><span class="muted">Fabric</span><p id="material">To be confirmed</p></div><div><span class="muted">Fit</span><p id="fit">To be confirmed</p></div></div></div>
       <div class="product-aside"><span class="eyebrow">PRE-ORDER</span><h3>Made for your order.</h3><p id="preorderMessage">Check the estimated dispatch and delivery window before ordering.</p><div class="timing"><span>Expected dispatch</span><strong id="shippingExpected">To be announced</strong><span>Delivery after dispatch</span><strong id="deliveryExpected">Shown after selecting your governorate</strong></div></div>
       <div id="productGallery" class="product-gallery" hidden></div>
     </section>
     <section id="order" class="order-section shell" aria-labelledby="orderTitle">
-      <div class="section-heading"><div><span class="eyebrow">02 — YOUR ORDER</span><h2 id="orderTitle">Find your fit.</h2></div><p>اختيار Collection وDelivery details، في خطوة واحدة.</p></div>
+      <div class="section-heading"><div><span class="eyebrow">02 — YOUR ORDER</span><h2 id="orderTitle">Find your fit.</h2></div><p>Choose your item and enter your delivery details in one step.</p></div>
       <div id="launchNotice" class="notice" role="status" hidden></div>
       <form id="orderForm" novalidate>
         <fieldset id="orderFields" disabled>
@@ -130,14 +130,14 @@ h1 span{color:#8e3943}
                 <label class="field-label" id="colorLabel">Color <span id="colorName" class="muted"></span></label><div id="colorOptions" class="color-options" role="group" aria-labelledby="colorLabel"></div>
                 <div class="size-label"><span class="field-label" id="sizeLabel">Size</span><a href="#size-guide">دليل Size Guide ↙</a></div><div id="sizeOptions" class="size-options" role="group" aria-labelledby="sizeLabel"></div>
                 <p id="selectionStatus" class="field-help" role="status"></p>
-                <label for="quantity" class="field-label">Quantity</label><div class="quantity-control"><button type="button" id="decreaseQuantity" aria-label="تقليل Quantity">−</button><input id="quantity" name="quantity" type="number" value="1" min="1" max="5" inputmode="numeric" required><button type="button" id="increaseQuantity" aria-label="زيادة Quantity">+</button></div>
+                <label for="quantity" class="field-label">Quantity</label><div class="quantity-control"><button type="button" id="decreaseQuantity" aria-label="Decrease Quantity">−</button><input id="quantity" name="quantity" type="number" value="1" min="1" max="5" inputmode="numeric" required><button type="button" id="increaseQuantity" aria-label="Increase Quantity">+</button></div>
               </div>
               <div class="form-card">
                 <div class="card-heading"><span class="step-number">02</span><h3>Delivery details</h3></div><p class="field-help">No account required. Your details are used for order updates and delivery.</p>
                 <div class="fields-grid">
                   <div class="field"><label for="customerName">Full name</label><input id="customerName" name="name" autocomplete="name" minlength="2" maxlength="100" required placeholder="Recipient name"></div>
                   <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" dir="ltr" autocomplete="tel" maxlength="20" required placeholder="01xxxxxxxxx"><span class="field-help">Egyptian mobile number for order updates</span></div>
-                  <div class="field"><label for="governorate">Governorate</label><select id="governorate" name="governorate" required><option value="">اختار Governorate</option></select></div>
+                  <div class="field"><label for="governorate">Governorate</label><select id="governorate" name="governorate" required><option value="">Select Governorate</option></select></div>
                   <div class="field"><label for="city">City / area</label><input id="city" name="city" autocomplete="address-level2" minlength="2" maxlength="100" required placeholder="City or area"></div>
                   <div class="field span-full"><label for="address">Full address</label><textarea id="address" name="address" autocomplete="street-address" rows="2" minlength="8" maxlength="500" required placeholder="Street, building, floor, apartment and landmark"></textarea></div>
                   <div class="field span-full"><label for="notes">Notes <span class="muted">(optional)</span></label><textarea id="notes" name="notes" rows="2" maxlength="500" placeholder="Additional delivery details"></textarea></div>
@@ -147,9 +147,9 @@ h1 span{color:#8e3943}
             </div>
             <aside class="order-summary form-card" aria-labelledby="summaryTitle">
               <span class="eyebrow">YOUR FIRST PIECE</span><h3 id="summaryTitle">Order summary</h3>
-              <div class="summary-product"><div class="mini-swatch" id="summarySwatch"></div><div><strong id="summaryName">The Essential Sweatshirt</strong><span id="summaryVariant" class="muted">اختار Color وSize</span></div></div>
-              <dl class="summary-lines"><div><dt>Subtotal</dt><dd id="subtotal">—</dd></div><div><dt>Shipping</dt><dd id="shippingFee">اختار Governorate</dd></div><div class="summary-total"><dt>Total</dt><dd id="total">—</dd></div></dl>
-              <div class="summary-preorder"><strong>This is a pre-order</strong><p id="summaryShipping">موعد Shipping To be announced.</p><p id="summaryDelivery">مدة التوصيل تظهر بعد اختيار Governorate.</p></div>
+              <div class="summary-product"><div class="mini-swatch" id="summarySwatch"></div><div><strong id="summaryName">The Essential Sweatshirt</strong><span id="summaryVariant" class="muted">Select a color andSize</span></div></div>
+              <dl class="summary-lines"><div><dt>Subtotal</dt><dd id="subtotal">—</dd></div><div><dt>Shipping</dt><dd id="shippingFee">Select Governorate</dd></div><div class="summary-total"><dt>Total</dt><dd id="total">—</dd></div></dl>
+              <div class="summary-preorder"><strong>This is a pre-order</strong><p id="summaryShipping">Date Shipping To be announced.</p><p id="summaryDelivery">Delivery estimate appears after selecting Governorate.</p></div>
               <p id="paymentDescription" class="field-help"></p>
               <p class="field-help">Submitting places your request with the store. No payment is collected on this page.</p>
               <button type="submit" id="submitOrder" class="button primary full-width">Submit demo order <span aria-hidden="true">↙</span></button>
@@ -159,10 +159,10 @@ h1 span{color:#8e3943}
         <div id="submitStatus" class="notice" role="status" tabindex="-1" hidden></div>
         <div id="retryActions" class="retry-actions" hidden><button id="retryOrder" type="button" class="button primary">Retry the same order</button><button id="differentOrder" type="button" class="button secondary">Start a different order</button></div>
       </form>
-      <section id="successPanel" class="success-panel" tabindex="-1" hidden aria-labelledby="successTitle"><span class="success-icon" aria-hidden="true">✓</span><span class="eyebrow" id="successMode">Demo order</span><h2 id="successTitle">Your order is received.</h2><p id="successDescription"></p><p class="order-number"><span>Order number</span><strong id="successOrderId" dir="ltr"></strong></p><p id="successTotal"></p><p class="field-help">احتفظ بOrder number للمتابعة. الطلب لا يعني أن الدفع تم تحصيله.</p><button id="newOrder" type="button" class="button secondary">New order</button></section>
+      <section id="successPanel" class="success-panel" tabindex="-1" hidden aria-labelledby="successTitle"><span class="success-icon" aria-hidden="true">✓</span><span class="eyebrow" id="successMode">Demo order</span><h2 id="successTitle">Your order is received.</h2><p id="successDescription"></p><p class="order-number"><span>Order number</span><strong id="successOrderId" dir="ltr"></strong></p><p id="successTotal"></p><p class="field-help">Keep the order number for reference. Payment has not been collected..</p><button id="newOrder" type="button" class="button secondary">New order</button></section>
     </section>
-    <section id="size-guide" class="size-section shell" aria-labelledby="sizeTitle"><div><span class="eyebrow">03 — Size المناسب</span><h2 id="sizeTitle">The size guide.</h2><p class="muted" id="guideNote">Sample measurements only. Confirm real measurements before launch.</p></div><div class="table-scroll"><table><caption class="sr-only">جدول Size Guide بالسنتيمتر</caption><thead><tr><th scope="col">Size</th><th scope="col">Chest (cm)</th><th scope="col">Length (cm)</th><th scope="col">Sleeve (cm)</th><th scope="col">Notes</th></tr></thead><tbody id="sizeGuideBody"></tbody></table></div></section>
-    <section id="policies" class="policies-section shell" aria-labelledby="policiesTitle"><span class="eyebrow">04 — Details تفرق</span><h2 id="policiesTitle">Before you order.</h2><div class="policy-grid"><details><summary>Shipping والتوصيل <span aria-hidden="true">+</span></summary><p id="shippingPolicy">سياسة Shipping To be confirmed.</p></details><details><summary>Exchanges <span aria-hidden="true">+</span></summary><p id="exchangePolicy">سياسة Exchanges To be confirmed.</p></details><details><summary>Returns <span aria-hidden="true">+</span></summary><p id="returnPolicy">سياسة Returns To be confirmed.</p></details></div><div class="contact-row"><span>Any questions?</span><div id="contactLinks"><span class="muted">Contact details coming soon.</span></div></div></section>
+    <section id="size-guide" class="size-section shell" aria-labelledby="sizeTitle"><div><span class="eyebrow">03 — Size </span><h2 id="sizeTitle">The size guide.</h2><p class="muted" id="guideNote">Sample measurements only. Confirm real measurements before launch.</p></div><div class="table-scroll"><table><caption class="sr-only">Size guide in centimeters</caption><thead><tr><th scope="col">Size</th><th scope="col">Chest (cm)</th><th scope="col">Length (cm)</th><th scope="col">Sleeve (cm)</th><th scope="col">Notes</th></tr></thead><tbody id="sizeGuideBody"></tbody></table></div></section>
+    <section id="policies" class="policies-section shell" aria-labelledby="policiesTitle"><span class="eyebrow">04 — Details matter</span><h2 id="policiesTitle">Before you order.</h2><div class="policy-grid"><details><summary>Shipping & delivery <span aria-hidden="true">+</span></summary><p id="shippingPolicy">Policy Shipping To be confirmed.</p></details><details><summary>Exchanges <span aria-hidden="true">+</span></summary><p id="exchangePolicy">Policy Exchanges To be confirmed.</p></details><details><summary>Returns <span aria-hidden="true">+</span></summary><p id="returnPolicy">Policy Returns To be confirmed.</p></details></div><div class="contact-row"><span>Any questions?</span><div id="contactLinks"><span class="muted">Contact details coming soon.</span></div></div></section>
   </main>
   <footer class="site-footer"><div class="shell"><a href="#" class="brand" id="footerBrand">BRAND NAME</a><span>A new point of view.</span><a href="#order">Shop now ↖</a></div></footer>
   <script>
@@ -192,14 +192,14 @@ h1 span{color:#8e3943}
       operation = window.StoreTransport.request(name, payload);
     } else if (window.google && google.script && google.script.run) {
       operation = new Promise(function (resolve, reject) {
-        var runner = google.script.run.withSuccessHandler(resolve).withFailureHandler(function () { reject({ code: 'TRANSPORT', message: 'تعذّر التأكد من نتيجة الإرسال. أعد المحاولة بنفس الطلب.' }); });
+        var runner = google.script.run.withSuccessHandler(resolve).withFailureHandler(function () { reject({ code: 'TRANSPORT', message: 'Couldn't verify the submission. Retry the same order..' }); });
         if (payload === undefined) runner[name](); else runner[name](payload);
       });
     } else {
-      return Promise.reject({ code: 'TRANSPORT', message: 'هذه الصفحة تحتاج تشغيلها من نشر Google Apps Script، أو من خادم المعاينة المحلي المرفق.' });
+      return Promise.reject({ code: 'TRANSPORT', message: 'Run this page through Google Apps Script or the provided local preview server..' });
     }
     return Promise.resolve(operation).then(function (result) {
-      if (!result || result.ok !== true) throw (result && result.error) || { code: 'TRANSPORT', message: 'تعذّر التحقق من استجابة المتجر.' };
+      if (!result || result.ok !== true) throw (result && result.error) || { code: 'TRANSPORT', message: 'Unable to verify the store response.' };
       return result.data;
     });
   }
@@ -244,7 +244,7 @@ h1 span{color:#8e3943}
     if (!sizes.some(function (v) { return v.size === state.size && variantAvailable(v); })) { var first = sizes.find(variantAvailable); state.size = first ? first.size : ''; }
     clear($('sizeOptions'));
     sizes.forEach(function (v) {
-      var button = element('button', 'size-button', v.size); button.type = 'button'; button.dir = 'ltr'; button.disabled = !variantAvailable(v); button.setAttribute('aria-pressed', String(state.size === v.size)); button.setAttribute('aria-label', 'مقاس ' + v.size + (button.disabled ? ' Unavailable' : ''));
+      var button = element('button', 'size-button', v.size); button.type = 'button'; button.dir = 'ltr'; button.disabled = !variantAvailable(v); button.setAttribute('aria-pressed', String(state.size === v.size)); button.setAttribute('aria-label', 'Size ' + v.size + (button.disabled ? ' Unavailable' : ''));
       button.addEventListener('click', function () { state.size = v.size; renderChoices(); updateSummary(); beginCheckout(); }); $('sizeOptions').appendChild(button);
     });
   }
@@ -252,17 +252,17 @@ h1 span{color:#8e3943}
     if (!state.catalog) return;
     var variant = selectedVariant(); var ship = selectedShipping(); var qty = quantity();
     var subtotal = variant && qty ? variant.price_minor * qty : null;
-    setText('summaryName', state.catalog.product.name); setText('summaryVariant', variant ? variant.color_label + ' / ' + variant.size + ' / Quantity: ' + (qty || '—') : 'اختار لونًا ومقاسًا Availableين');
-    setText('selectionStatus', variantAvailable(variant) ? 'السعر للقطعة: ' + money(variant.price_minor) : 'هذا الاختيار Unavailable حاليًا.');
-    setText('subtotal', subtotal == null ? '—' : money(subtotal)); setText('shippingFee', ship ? money(ship.fee_minor) : 'اختار Governorate'); setText('total', subtotal != null && ship ? money(subtotal + ship.fee_minor) : '—');
+    setText('summaryName', state.catalog.product.name); setText('summaryVariant', variant ? variant.color_label + ' / ' + variant.size + ' / Quantity: ' + (qty || '—') : 'Select لونًا وSizeًا Availableين');
+    setText('selectionStatus', variantAvailable(variant) ? 'Price per piece: ' + money(variant.price_minor) : 'This option is currently unavailable.');
+    setText('subtotal', subtotal == null ? '—' : money(subtotal)); setText('shippingFee', ship ? money(ship.fee_minor) : 'Select Governorate'); setText('total', subtotal != null && ship ? money(subtotal + ship.fee_minor) : '—');
     var delivery = ship ? String(ship.delivery_days) : 'Shown after selecting your governorate';
-    setText('deliveryExpected', delivery); setText('summaryDelivery', ship ? 'Delivery after dispatch: ' + delivery : 'مدة التوصيل تظهر بعد اختيار Governorate.');
+    setText('deliveryExpected', delivery); setText('summaryDelivery', ship ? 'Delivery after dispatch: ' + delivery : 'Delivery estimate appears after selecting Governorate.');
     $('submitOrder').disabled = state.busy || !isOpen() || !variantAvailable(variant) || !qty || !ship;
   }
   function safeImage(url) { try { var value = new URL(url); return value.protocol === 'https:' ? value.href : ''; } catch (_) { return ''; } }
   function renderCatalog(catalog) {
     var hasProduct = !!catalog.product;
-    catalog.product = catalog.product || { id: '', name: 'المنتج قيد الإعداد', description: 'تفاصيل المنتج لم تكتمل بعد.', material: '', fit: '', images: [], is_demo: true };
+    catalog.product = catalog.product || { id: '', name: 'Product setup in progress', description: 'Product details are not complete yet.', material: '', fit: '', images: [], is_demo: true };
     catalog.variants = catalog.variants || []; catalog.shipping = catalog.shipping || []; catalog.sizeGuide = catalog.sizeGuide || [];
     catalog.readiness = catalog.readiness || { ready: false, issues: [] };
     state.catalog = catalog;
@@ -271,36 +271,36 @@ h1 span{color:#8e3943}
     if (quantity() > Number($('quantity').max)) $('quantity').value = $('quantity').max;
     var settings = catalog.settings; var demo = truth(settings.test_mode);
     document.title = settings.brand_name + ' | Pre-order'; setText('navBrand', settings.brand_name); setText('footerBrand', settings.brand_name);
-    setText('modeBanner', demo ? 'وضع تجريبي — الأسعار والقياسات للتجربة، ولا نستقبل طلبات بيع حقيقية.' : 'Pre-order — راجع موعد Shipping ومدة التوصيل قبل تأكيد طلبك.');
+    setText('modeBanner', demo ? 'Demo mode — sample prices and measurements only. Real orders are disabled..' : 'Pre-order — Review expected dispatch and delivery before ordering.');
     setText('brandDescription', settings.brand_description); setText('productTitle', catalog.product.name); setText('productDescription', catalog.product.description);
     setText('material', catalog.product.material || 'To be confirmed'); setText('fit', catalog.product.fit || 'To be confirmed');
-    setText('preorderMessage', settings.preorder_message || 'هذا المنتج بنظام الطلب المسبق.'); setText('shippingExpected', settings.shipping_expected || 'To be announced');
+    setText('preorderMessage', settings.preorder_message || 'This product is available for pre-order.'); setText('shippingExpected', settings.shipping_expected || 'To be announced');
     setText('summaryShipping', 'Expected dispatch: ' + (settings.shipping_expected || 'To be announced'));
-    setText('shippingPolicy', settings.shipping_policy || 'سياسة Shipping To be confirmed.'); setText('exchangePolicy', settings.exchange_policy || 'سياسة Exchanges To be confirmed.'); setText('returnPolicy', settings.return_policy || 'سياسة Returns To be confirmed.');
-    setText('guideNote', demo || truth(catalog.product.is_demo) ? 'Sample measurements only. Confirm real measurements before launch.' : 'القياسات بالسنتيمتر. راجع Notes كل مقاس قبل الاختيار.');
-    var paymentText = { demo: 'طريقة الدفع: وضع تجريبي، لا يتم تحصيل أموال.', cod: 'طريقة الدفع: الدفع عند الاستلام. لا يُعتبر إرسال الطلب دفعًا محصلًا.', manual_transfer: 'طريقة الدفع: تحويل يدوي، وفق تعليمات المتجر. تسجيل التحصيل من الإدارة فقط.' };
-    setText('paymentDescription', paymentText[settings.payment_method] || 'طريقة الدفع لم تُحدد بعد.');
+    setText('shippingPolicy', settings.shipping_policy || 'Policy Shipping To be confirmed.'); setText('exchangePolicy', settings.exchange_policy || 'Policy Exchanges To be confirmed.'); setText('returnPolicy', settings.return_policy || 'Policy Returns To be confirmed.');
+    setText('guideNote', demo || truth(catalog.product.is_demo) ? 'Sample measurements only. Confirm real measurements before launch.' : 'Measurements are in centimeters. Review notes for your size..');
+    var paymentText = { demo: 'Payment: demo mode. No money is collected..', cod: 'Payment: cash on delivery. Submitting an order does not record payment..', manual_transfer: 'Payment: manual transfer, according to store instructions. Only staff record payment..' };
+    setText('paymentDescription', paymentText[settings.payment_method] || 'Payment method is not set yet.');
     clear($('contactLinks'));
     var contactAdded = false;
     var phone = String(settings.contact_phone || '').replace(/[\s()-]/g, '');
-    if (/^\+?[\d]{10,15}$/.test(phone)) { var phoneLink = element('a', '', 'اتصل بنا'); phoneLink.href = 'tel:' + phone; $('contactLinks').appendChild(phoneLink); contactAdded = true; }
+    if (/^\+?[\d]{10,15}$/.test(phone)) { var phoneLink = element('a', '', 'Contact us'); phoneLink.href = 'tel:' + phone; $('contactLinks').appendChild(phoneLink); contactAdded = true; }
     var email = String(settings.contact_email || '');
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !/[\r\n]/.test(email)) { var emailLink = element('a', '', 'البريد الإلكتروني'); emailLink.href = 'mailto:' + encodeURIComponent(email); $('contactLinks').appendChild(emailLink); contactAdded = true; }
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !/[\r\n]/.test(email)) { var emailLink = element('a', '', 'Email'); emailLink.href = 'mailto:' + encodeURIComponent(email); $('contactLinks').appendChild(emailLink); contactAdded = true; }
     if (!contactAdded) $('contactLinks').appendChild(element('span', 'muted', 'Contact details coming soon.'));
     clear($('sizeGuideBody'));
     catalog.sizeGuide.forEach(function (row) { var tr = element('tr'); [row.size, row.chest_cm, row.length_cm, row.sleeve_cm, row.notes].forEach(function (value) { tr.appendChild(element('td', '', value)); }); $('sizeGuideBody').appendChild(tr); });
-    if (!catalog.sizeGuide.length) { var tr = element('tr'); var cell = element('td', '', 'جدول Size Guide To be announced.'); cell.colSpan = 5; tr.appendChild(cell); $('sizeGuideBody').appendChild(tr); }
-    var previousGov = $('governorate').value; clear($('governorate')); var placeholder = element('option', '', 'اختار Governorate'); placeholder.value = ''; $('governorate').appendChild(placeholder);
+    if (!catalog.sizeGuide.length) { var tr = element('tr'); var cell = element('td', '', 'Table Size Guide To be announced.'); cell.colSpan = 5; tr.appendChild(cell); $('sizeGuideBody').appendChild(tr); }
+    var previousGov = $('governorate').value; clear($('governorate')); var placeholder = element('option', '', 'Select Governorate'); placeholder.value = ''; $('governorate').appendChild(placeholder);
     catalog.shipping.forEach(function (row) { var option = element('option', '', row.governorate); option.value = row.id; $('governorate').appendChild(option); }); $('governorate').value = previousGov;
     clear($('productGallery'));
-    (catalog.product.images || []).forEach(function (url) { var src = safeImage(url); if (!src) return; var figure = element('figure'); var img = element('img'); img.src = src; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer'; img.alt = catalog.product.name; figure.appendChild(img); figure.appendChild(element('figcaption', '', truth(catalog.product.is_demo) ? 'صورة بديلة للتجهيز — ليست توثيقًا للمنتج النهائي' : catalog.product.name)); $('productGallery').appendChild(figure); }); $('productGallery').hidden = !$('productGallery').children.length;
+    (catalog.product.images || []).forEach(function (url) { var src = safeImage(url); if (!src) return; var figure = element('figure'); var img = element('img'); img.src = src; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer'; img.alt = catalog.product.name; figure.appendChild(img); figure.appendChild(element('figcaption', '', truth(catalog.product.is_demo) ? 'Placeholder artwork — not a photo of the actual product' : catalog.product.name)); $('productGallery').appendChild(figure); }); $('productGallery').hidden = !$('productGallery').children.length;
     renderChoices();
     var issues = (catalog.readiness.issues || []).join('\n• ');
-    if (!hasProduct) { $('launchNotice').hidden = false; setText('launchNotice', 'المنتج قيد الإعداد؛ استقبال الطلبات متوقف حتى تكتمل تفاصيل المنتج.' + (issues ? '\n• ' + issues : '')); }
-    else if (demo) { $('launchNotice').hidden = false; setText('launchNotice', 'أنت في وضع التجربة: يمكنك Submit demo order يظهر للإدارة منفصلًا عن الطلبات الحقيقية. لا يوجد تحصيل أموال أو التزام بتوصيل هذا الطلب.'); }
-    else if (!isOpen()) { $('launchNotice').hidden = false; setText('launchNotice', 'استقبال الطلبات الحقيقية متوقف حتى اكتمال إعدادات الإطلاق.' + (issues ? '\n• ' + issues : '')); }
+    if (!hasProduct) { $('launchNotice').hidden = false; setText('launchNotice', 'Product setup in progress. Orders are paused until details are confirmed..' + (issues ? '\n• ' + issues : '')); }
+    else if (demo) { $('launchNotice').hidden = false; setText('launchNotice', 'Demo mode: you can submit test orders visible to staff. No payment or delivery commitment applies..'); }
+    else if (!isOpen()) { $('launchNotice').hidden = false; setText('launchNotice', 'Real orders are paused until launch setup is complete.' + (issues ? '\n• ' + issues : '')); }
     else $('launchNotice').hidden = true;
-    setText('submitOrder', demo ? 'Submit demo order ↙' : 'تأكيد Pre-order ↙');
+    setText('submitOrder', demo ? 'Submit demo order ↙' : 'Confirm Pre-order ↙');
     $('orderFields').disabled = !isOpen() || state.busy || !!state.pending;
     $('loadError').hidden = true;
     updateSummary();
@@ -310,10 +310,10 @@ h1 span{color:#8e3943}
     return api('getCatalog').then(function (catalog) {
       renderCatalog(catalog); emit('view_item', { item_id: catalog.product.id });
       if (storageGet('brand-store:pending') && !state.pending && !state.lastReceipt) {
-        setStatus('يوجد إرسال سابق لم نتأكد من نتيجته في هذه الجلسة. إذا أعدت إدخال نفس البيانات، سيمنع الخادم تكرار الطلب. لطلب مختلف استخدم زر «Start a different order» بعد التأكد من الطلب السابق.', false);
+        setStatus('A previous submission couldn't be verified. Retrying with the same details prevents duplicates. Check the previous order before starting a different one..', false);
         $('retryActions').hidden = false; $('retryOrder').hidden = true;
       }
-    }).catch(function (error) { $('loadError').hidden = false; setText('loadErrorText', error.message || 'تعذّر تحميل المتجر. أعد المحاولة.'); setText('modeBanner', 'تعذّر تحميل المتجر'); $('orderFields').disabled = true; }).finally(function () { $('reloadCatalog').disabled = false; });
+    }).catch(function (error) { $('loadError').hidden = false; setText('loadErrorText', error.message || 'Couldn't load the store. Please try again..'); setText('modeBanner', 'Couldn't load the store'); $('orderFields').disabled = true; }).finally(function () { $('reloadCatalog').disabled = false; });
   }
   function beginCheckout() {
     if (state.checkoutStarted || !state.catalog) return; state.checkoutStarted = true;
@@ -340,7 +340,7 @@ h1 span{color:#8e3943}
     return { idempotency_key: currentKey(), checkout_token: state.catalog.checkout.token, honeypot: $('website').value, customer: { name: $('customerName').value.trim(), phone: $('phone').value.trim(), governorate_id: $('governorate').value, city: $('city').value.trim(), address: $('address').value.trim(), notes: $('notes').value.trim() }, items: [{ variant_id: selectedVariant().id, quantity: quantity() }], utm: getUtm() };
   }
   function normalizePhonePreview(value) {
-    var digits = value.replace(/[\s()-]/g, '').replace(/[٠-٩]/g, function (c) { return String(c.charCodeAt(0) - 1632); });
+    var digits = value.replace(/[\s()-]/g, '').replace(/[0-9]/g, function (c) { return String(c.charCodeAt(0) - 1632); });
     digits = digits.replace(/^\+20|^0020|^20/, '0'); return /^01[0125]\d{8}$/.test(digits);
   }
   function submit(payload) {
@@ -351,17 +351,17 @@ h1 span{color:#8e3943}
       state.lastReceipt = receipt; state.pending = null; storageRemove('brand-store:pending'); storageRemove('brand-store:order-key'); state.key = '';
       $('orderForm').hidden = true; $('successPanel').hidden = false; setText('successOrderId', receipt.order_id); setText('successMode', receipt.mode === 'demo' ? 'Demo order' : 'Pre-order');
       setText('successTitle', receipt.mode === 'demo' ? 'Your demo order has been received.' : 'Your order is received.');
-      setText('successDescription', receipt.mode === 'demo' ? 'This is a demo order visible to store management. No payment has been made.' : 'تم تسجيل طلبك المسبق. تابع تعليمات المتجر واحتفظ بOrder number للمتابعة.');
-      setText('successTotal', 'Total المسجل: ' + money(receipt.total_minor)); $('successPanel').focus();
+      setText('successDescription', receipt.mode === 'demo' ? 'This is a demo order visible to store management. No payment has been made.' : 'Your pre-order has been recorded. Keep your order number for reference..');
+      setText('successTotal', 'Total Recorded: ' + money(receipt.total_minor)); $('successPanel').focus();
       emit('order_submitted', { item_id: state.catalog.product.id, value: receipt.total_minor / 100 });
     }).catch(function (error) {
       var definite = safeRejected.indexOf(error.code) !== -1;
       if (definite) {
         state.pending = null; storageRemove('brand-store:pending'); rotateKey();
-        setStatus(error.message || 'راجع بيانات الطلب ثم أعد الإرسال.', true);
+        setStatus(error.message || 'Review order details and retry.', true);
         if (error.code === 'CHECKOUT_EXPIRED') return loadCatalog();
       } else {
-        setStatus((error.code === 'IDEMPOTENCY_CONFLICT' ? 'هذا المفتاح مرتبط بطلب ببيانات مختلفة. تأكد من الطلب السابق قبل بدء New order.' : 'We couldn't التأكد من نتيجة الإرسال. قد يكون الطلب محفوظًا. أعد إرسال نفس الطلب؛ سيمنع الخادم تكراره.') + '\nCheck the current order before placing another.', true);
+        setStatus((error.code === 'IDEMPOTENCY_CONFLICT' ? 'هذا المفتاح مرتبط بOrder ببيانات مختلفة. تأكد من الOrder السابق قبل بدء New order.' : 'We couldn't verify whether the order was submitted. It may have been saved. Retry the same order to prevent duplicates..') + '\nCheck the current order before placing another.', true);
         $('retryActions').hidden = false; $('retryOrder').hidden = error.code === 'IDEMPOTENCY_CONFLICT';
       }
     }).finally(function () {
@@ -382,7 +382,7 @@ h1 span{color:#8e3943}
   $('increaseQuantity').addEventListener('click', function () { $('quantity').value = String(Math.min(Number($('quantity').max), quantity() + 1)); updateSummary(); });
   $('retryOrder').addEventListener('click', function () { if (state.pending) submit(state.pending); });
   $('differentOrder').addEventListener('click', function () {
-    if (!window.confirm('قد يكون الطلب السابق محفوظًا بالفعل. ابدأ طلبًا مختلفًا فقط بعد التأكد من نتيجته من الإدارة. هل تريد البدء بمفتاح جديد؟')) return;
+    if (!window.confirm('The previous order may already have been saved. Only start a different order after checking with staff. Generate a new request key?')) return;
     state.pending = null; rotateKey(); $('retryActions').hidden = true; $('retryOrder').hidden = false; setStatus('', false); $('orderFields').disabled = !isOpen(); updateSummary();
   });
   $('newOrder').addEventListener('click', function () {
