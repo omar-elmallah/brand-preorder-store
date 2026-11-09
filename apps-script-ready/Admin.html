@@ -57,26 +57,26 @@
     
 <section id="appearance-view" role="tabpanel" aria-labelledby="appearance-tab" hidden>
  <div class="panel">
-  <div class="split"><div><div class="eyebrow">BRAND STUDIO</div><h2>Website Appearance Editor</h2></div><span class="muted">English storefront · V2</span></div>
+  <div class="split"><div><div class="eyebrow">BRAND STUDIO</div><h2>GENRAGE Website Editor</h2></div><span class="muted">English storefront · V2</span></div>
   <p class="muted">Edit the homepage look without changing orders or checkout. Save to publish your changes. Uploads are PUBLIC images; do not upload private photos or customer information.</p>
   <div class="editor-grid">
    <form id="appearance-form">
     <div class="settings-grid">
-     <div class="field wide"><label for="a-hero_title">Hero headline</label><input class="control" id="a-hero_title" maxlength="180" placeholder="The New Collection."></div>
+     <div class="field wide"><label for="a-hero_word">Giant background word</label><input class="control" id="a-hero_word" maxlength="45" placeholder="GENRAGE"></div><div class="field wide"><label for="a-hero_description">Hero description</label><textarea class="control" id="a-hero_description" maxlength="180"></textarea></div><div class="field wide"><label for="a-hero_title">Hero headline (fallback)</label><input class="control" id="a-hero_title" maxlength="180" placeholder="The New Collection."></div>
      <div class="field"><label for="a-hero_kicker">Small headline</label><input class="control" id="a-hero_kicker" maxlength="180"></div>
      <div class="field"><label for="a-hero_button">Call to action</label><input class="control" id="a-hero_button" maxlength="180"></div>
      <div class="field"><label for="a-theme">Color theme</label><select class="control" id="a-theme"><option value="editorial">Editorial / Orange & Burgundy</option><option value="minimal">Minimal / Monochrome</option><option value="dark">Dark / Luxury</option></select></div>
      <div class="field"><label for="a-scroll_animation">Scroll animations</label><select class="control" id="a-scroll_animation"><option value="reveal">Reveal on scroll</option><option value="parallax">Parallax photo + reveal</option><option value="off">No animation</option></select></div>
      <div class="field wide"><label for="a-hero_image_url">Hero image URL (HTTPS)</label><input class="control ltr" id="a-hero_image_url" type="url" maxlength="1800" placeholder="https://..."></div>
-     <div class="field wide"><label for="a-editorial_image_url">Editorial image URL (HTTPS) — reserved for future section</label><input class="control ltr" id="a-editorial_image_url" type="url" maxlength="1800" placeholder="https://..."></div>
+     <div class="field wide"><label for="a-thumbnail_image_url">Thumbnail image URL (optional)</label><input class="control ltr" id="a-thumbnail_image_url" type="url" maxlength="1800" placeholder="https://..."></div><div class="field wide"><label for="a-editorial_image_url">Editorial image URL (HTTPS) — reserved for future section</label><input class="control ltr" id="a-editorial_image_url" type="url" maxlength="1800" placeholder="https://..."></div>
      <div class="field wide"><label for="a-section_label">Collection label</label><input class="control" id="a-section_label" maxlength="180"></div>
      <div class="field wide"><label for="a-footer_note">Footer note</label><input class="control" id="a-footer_note" maxlength="180"></div>
      <div class="field wide"><label for="a-announcement_text">Announcement text (never hides demo or safety notices)</label><input class="control" id="a-announcement_text" maxlength="180"></div>
     </div>
     <div class="media-uploader">
-      <label for="appearance-upload"><strong>Upload a public hero photo</strong> · JPG, PNG, WebP · up to 2MB</label>
+      <label for="appearance-upload"><strong>Upload your center model photo</strong> · JPG, PNG, WebP · up to 2MB</label>
       <input type="file" id="appearance-upload" accept="image/jpeg,image/png,image/webp">
-      <button type="button" class="btn secondary" id="upload-appearance">Upload & set hero image</button>
+      <button type="button" class="btn secondary" id="upload-appearance">Upload center image</button>
       <p id="appearance-upload-status" class="muted" role="status"></p>
     </div>
     <div class="editor-actions"><button class="btn accent" type="submit" id="save-appearance">Save & publish appearance</button><span id="appearance-save-status" class="muted" role="status"></span></div>
@@ -169,7 +169,7 @@ async function mutateOrder(name,payload,button){if(state.busy)return;state.busy=
 function closeModal(){if(state.busy)return;$('order-modal').hidden=true;document.body.style.overflow='';state.order=null;if(state.lastFocus&&document.contains(state.lastFocus))state.lastFocus.focus();else $('refresh').focus();}
 $('close-modal').addEventListener('click',closeModal);$('order-modal').addEventListener('click',function(e){if(e.target===$('order-modal'))closeModal();});document.addEventListener('keydown',function(e){if($('order-modal').hidden)return;if(e.key==='Escape')closeModal();if(e.key==='Tab'){var all=Array.from($('order-modal').querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex="0"]')).filter(function(el){return el.offsetParent!==null;});if(!all.length)return;var first=all[0],last=all[all.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
 
-var appearanceKeys=['hero_title','hero_kicker','hero_button','hero_image_url','editorial_image_url','theme','scroll_animation','announcement_text','section_label','footer_note'];
+var appearanceKeys=['hero_word','hero_description','thumbnail_image_url','hero_title','hero_kicker','hero_button','hero_image_url','editorial_image_url','theme','scroll_animation','announcement_text','section_label','footer_note'];
 var appearanceState={loaded:false};
 function renderAppearance(a){
  if(!appearanceState.loaded){
@@ -183,7 +183,7 @@ function previewAppearance(){
  schemes={editorial:['#d98b32','#f7eeeb','#632333'],minimal:['#b2b2ac','#fafaf8','#222222'],dark:['#514138','#26211f','#f2e7da']},c=schemes[theme]||schemes.editorial;
  $('appearance-preview').style.cssText='border-color:'+c[0]+';background:'+c[1]+';color:'+c[2];
  $('ap-brand').textContent=$('s-brand_name').value||'BRAND NAME';
- $('ap-title').textContent=get('hero_title')||'The New Collection.';
+ $('ap-title').textContent=get('hero_word')||'GENRAGE';
  $('ap-kicker').textContent=get('hero_kicker');
  $('ap-button').textContent=get('hero_button')||'Explore the drop';
  $('ap-button').style.background=theme==='dark'?'#9c6c5e':c[2];
