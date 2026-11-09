@@ -45,7 +45,7 @@ test('foreign sheet marker fails closed before setup mutates existing tables',()
   const r=createRuntime();const ss=r.state.sheets.get(r.state.props.STORE_SPREADSHEET_ID);
   const before=JSON.stringify(Array.from(ss.tabs,([name,tab])=>[name,tab.data]));
   ss.meta=[];r.context.storeCache_=undefined;
-  const result=r.call('setupStore');assert.equal(result.ok,false);assert.equal(result.error.code,'WRONG_STORE');
+  assert.throws(()=>r.call('setupStore'),error=>error.safeCode==='WRONG_STORE');
   assert.equal(JSON.stringify(Array.from(ss.tabs,([name,tab])=>[name,tab.data])),before);
   assert.equal(r.state.sheets.size,1);
 });
@@ -53,7 +53,7 @@ test('foreign sheet marker fails closed before setup mutates existing tables',()
 test('every privileged RPC rejects anonymous, unlisted and owner-execution identity mismatch',()=>{
   const cases=[{active:'',effective:'omar@example.test'},{active:'other@example.test',effective:'other@example.test'},{active:'mustafa@example.test',effective:'omar@example.test'}];
   const names=['getAdminDashboard','adminGetOrder','adminSetOrderStatus','adminRecordPayment','adminRecoverPending','adminUpdateSettings','setupStore'];
-  for(const identity of cases){const r=createRuntime();Object.assign(r.state,identity);for(const name of names){const result=r.call(name,{});assert.equal(result.ok,false,name);assert.equal(result.error.code,'FORBIDDEN',name+' '+JSON.stringify(identity));}}
+  for(const identity of cases){const r=createRuntime();Object.assign(r.state,identity);for(const name of names){if(name==='setupStore'){assert.throws(()=>r.call(name),error=>error.safeCode==='FORBIDDEN');continue;}const result=r.call(name,{});assert.equal(result.ok,false,name);assert.equal(result.error.code,'FORBIDDEN',name+' '+JSON.stringify(identity));}}
   const r=createRuntime();Object.assign(r.state,{active:'mustafa@example.test',effective:'mustafa@example.test'});assert.equal(r.call('getAdminDashboard',{}).ok,true);
 });
 

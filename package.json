@@ -6,8 +6,10 @@
   "scripts": {
     "test": "node --test tests/*.test.cjs",
     "preview": "node tools/preview.cjs",
-    "check": "node tools/check.cjs",
-    "test:browser": "node tools/browser-check.cjs"
+    "check": "node tools/check.cjs && node tools/build-apps-script-ready.cjs --check",
+    "test:browser": "node tools/browser-check.cjs",
+    "prepare:apps-script": "node tools/build-apps-script-ready.cjs",
+    "test:browser:ready": "node tools/browser-check.cjs --ready"
   },
   "engines": {
     "node": ">=18"

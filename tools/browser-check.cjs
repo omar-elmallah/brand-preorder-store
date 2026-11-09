@@ -11,7 +11,7 @@ catch (_) { console.error('Optional check requires Playwright: npm install --no-
 
 async function main() {
   const preview = spawn(process.execPath, [path.join(__dirname, 'preview.cjs')], {
-    cwd: path.join(__dirname, '..'), env: { ...process.env, PORT: '0' }, stdio: ['ignore', 'pipe', 'pipe']
+    cwd: path.join(__dirname, '..'), env: { ...process.env, PORT: '0', ...(process.argv.includes('--ready')?{BRAND_STORE_SOURCE_DIR:path.join(__dirname,'../apps-script-ready')}:{}) }, stdio: ['ignore', 'pipe', 'pipe']
   });
   let browser;
   try {
