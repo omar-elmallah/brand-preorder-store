@@ -676,7 +676,7 @@ function getCatalog() {
     });
     var shipping = allShipping.filter(function(r) { return isTrue_(r.active) && (mode==='demo' || !isTrue_(r.is_demo)) && Number.isSafeInteger(Number(r.fee_minor)) && Number(r.fee_minor)>=0; }).map(function(r) { return {id:r.id,governorate:r.governorate,fee_minor:Number(r.fee_minor),delivery_days:r.delivery_days}; });
     var guide = allGuide.filter(function(r) { return mode==='demo' || !isTrue_(r.is_demo); });
-    return {settings:publicSettings_(s),product:p ? {id:p.id,name:p.name,description:p.description,material:p.material,fit:p.fit,images:imageUrls_(p.image_urls),is_demo:isTrue_(p.is_demo)} : null,
+    return {appearance:appearance_(),settings:publicSettings_(s),product:p ? {id:p.id,name:p.name,description:p.description,material:p.material,fit:p.fit,images:imageUrls_(p.image_urls),is_demo:isTrue_(p.is_demo)} : null,
       variants:variants,sizeGuide:guide,shipping:shipping,readiness:readiness_(s,products,allVariants,allShipping,allGuide),checkout:Object.assign(createCheckoutToken_(),{max_order_qty:numericSetting_(s,'max_order_qty',5,1,20)})};
   });
 }
@@ -713,7 +713,7 @@ function getAdminDashboard(filters) {
       });
       summary.by_variant=Object.keys(groups).map(function(k){return groups[k];}); summary.net_collected_minor=summary.collected_minor-summary.refunded_minor;
       var filtered = orders.filter(function(o) { return (!status || o.order_status===status) && (!search || [o.id,o.customer_name,o.phone].join(' ').toLowerCase().indexOf(search)>=0); }).sort(function(a,b) {return String(b.created_at).localeCompare(String(a.created_at));});
-      return {actor:actor,orders:filtered.slice(0,200).map(adminSafeOrder_),matched_count:filtered.length,summary:summary,readiness:launchReadiness_(settings_()),settings:settings_(),pending_count:all.filter(function(o){return o.transaction_state==='pending';}).length};
+      return {appearance:appearance_(),actor:actor,orders:filtered.slice(0,200).map(adminSafeOrder_),matched_count:filtered.length,summary:summary,readiness:launchReadiness_(settings_()),settings:settings_(),pending_count:all.filter(function(o){return o.transaction_state==='pending';}).length};
     });
   });
 }
@@ -776,4 +776,84 @@ function doGet(e) {
     }
   }
   return HtmlService.createTemplateFromFile(admin ? 'Admin' : 'Index').evaluate().setTitle(admin ? 'إدارة المتجر' : 'BRAND NAME — طلب مسبق').addMetaTag('viewport','width=device-width, initial-scale=1');
+}
+
+/** Website Appearance Editor. Keys are isolated from commerce & launch settings. */
+var APPEARANCE_DEFAULTS_ = Object.freeze({
+  hero_title:'The New Collection.', hero_kicker:'THE FIRST EDITION / 2026',
+  hero_button:'Explore the drop', hero_image_url:'', editorial_image_url:'',
+  theme:'editorial', scroll_animation:'reveal', announcement_text:'',
+  section_label:'01 — THE EDIT', footer_note:'A new point of view.'
+});
+function appearance_(){
+  var saved=settings_(), out={};
+  Object.keys(APPEARANCE_DEFAULTS_).forEach(function(k){
+    var v=saved['appearance_'+k];
+    out[k]=v===undefined||v===null ? APPEARANCE_DEFAULTS_[k] : String(v);
+  });
+  return out;
+}
+function validateAppearance_(raw){
+  if(!raw||typeof raw!=='object'||Array.isArray(raw))fail_('VALIDATION','Invalid appearance settings.');
+  var allowed=Object.keys(APPEARANCE_DEFAULTS_), cleaned={};
+  if(Object.keys(raw).some(function(k){return allowed.indexOf(k)<0;}))fail_('VALIDATION','Unknown appearance option.');
+  allowed.forEach(function(k){
+    if(!Object.prototype.hasOwnProperty.call(raw,k))return;
+    var v=text_(raw[k],k.indexOf('_url')>=0?1800:180);
+    if(k==='theme'&&['editorial','minimal','dark'].indexOf(v)<0)fail_('VALIDATION','Invalid theme.');
+    if(k==='scroll_animation'&&['reveal','parallax','off'].indexOf(v)<0)fail_('VALIDATION','Invalid animation setting.');
+    if(k.indexOf('_url')>=0&&v&&!/^https:\/\/[^\s<>"']+$/i.test(v))fail_('VALIDATION','Image URL must use HTTPS.');
+    cleaned[k]=v;
+  });
+  return cleaned;
+}
+function adminSaveAppearance(payload){
+  return apiResult_(function(){
+    var actor=requireAdmin_(), cleaned=validateAppearance_(payload&&payload.values);
+    return withLock_(function(){
+      var existing=settings_();
+      Object.keys(cleaned).forEach(function(k){
+        var key='appearance_'+k;
+        if(Object.prototype.hasOwnProperty.call(existing,key))patch_('Settings',key,{value:cleaned[k]});
+        else insert_('Settings',{key:key,value:cleaned[k],description:'Website Editor — '+k});
+      });
+      flush_();
+      audit_(actor,'appearance_updated','store',{fields:Object.keys(cleaned)});
+      return {appearance:appearance_()};
+    });
+  });
+}
+/** Intended only for images displayed publicly on the storefront. */
+function adminUploadAppearanceImage(payload){
+  return apiResult_(function(){
+    var actor=requireAdmin_();
+    if(!payload||typeof payload!=='object'||!/^image\/(jpeg|png|webp)$/.test(String(payload.mime||'')))fail_('VALIDATION','Use a JPG, PNG or WebP image.');
+    var base64=String(payload.base64||'');
+    if(base64.length<10||base64.length>2700000||!/^[A-Za-z0-9+\/]+=*$/.test(base64))fail_('VALIDATION','Image must be 2 MB or less.');
+    var bytes=Utilities.base64Decode(base64);
+    if(bytes.length>2000000)fail_('VALIDATION','Image exceeds 2 MB.');
+    // Validate basic file signatures, not only client-provided MIME.
+    var header=bytes.slice(0,12).map(function(b){return(b+256)%256;});
+    var jpg=header[0]===255&&header[1]===216&&header[2]===255;
+    var png=header[0]===137&&header[1]===80&&header[2]===78&&header[3]===71;
+    var webp=String.fromCharCode.apply(null,header.slice(0,4))==='RIFF'&&String.fromCharCode.apply(null,header.slice(8,12))==='WEBP';
+    if(!((payload.mime==='image/jpeg'&&jpg)||(payload.mime==='image/png'&&png)||(payload.mime==='image/webp'&&webp)))fail_('VALIDATION','File format does not match its contents.');
+    var props=PropertiesService.getScriptProperties(), folderId=props.getProperty('STORE_PUBLIC_MEDIA_FOLDER_ID'),folder;
+    if(folderId){folder=DriveApp.getFolderById(folderId);}
+    else{
+      folder=DriveApp.createFolder('Brand Store — PUBLIC website photos');
+      props.setProperty('STORE_PUBLIC_MEDIA_FOLDER_ID',folder.getId());
+    }
+    var extension=payload.mime==='image/jpeg'?'jpg':payload.mime==='image/png'?'png':'webp';
+    var file=folder.createFile(Utilities.newBlob(bytes,payload.mime,'brand-'+Utilities.getUuid()+'.'+extension));
+    try{
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK,DriveApp.Permission.VIEW);
+    }catch(e){
+      file.setTrashed(true);
+      fail_('SHARING_BLOCKED','Public image sharing is blocked by your Google account policy. Use a publicly hosted HTTPS image URL instead.');
+    }
+    var url='https://lh3.googleusercontent.com/d/'+encodeURIComponent(file.getId());
+    audit_(actor,'public_media_uploaded',file.getId(),{mime:payload.mime,size:bytes.length});
+    return {url:url,file_id:file.getId(),note:'Public image. Availability of Google Drive image delivery should be tested on an unsigned-in device.'};
+  });
 }
