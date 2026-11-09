@@ -128,7 +128,7 @@ h1 span{color:#8e3943}
               <div class="form-card choices-card">
                 <div class="card-heading"><span class="step-number">01</span><h3>Collection</h3></div>
                 <label class="field-label" id="colorLabel">Color <span id="colorName" class="muted"></span></label><div id="colorOptions" class="color-options" role="group" aria-labelledby="colorLabel"></div>
-                <div class="size-label"><span class="field-label" id="sizeLabel">Size</span><a href="#size-guide">دليل Size Guide ↙</a></div><div id="sizeOptions" class="size-options" role="group" aria-labelledby="sizeLabel"></div>
+                <div class="size-label"><span class="field-label" id="sizeLabel">Size</span><a href="#size-guide">Guide Size Guide ↙</a></div><div id="sizeOptions" class="size-options" role="group" aria-labelledby="sizeLabel"></div>
                 <p id="selectionStatus" class="field-help" role="status"></p>
                 <label for="quantity" class="field-label">Quantity</label><div class="quantity-control"><button type="button" id="decreaseQuantity" aria-label="Decrease Quantity">−</button><input id="quantity" name="quantity" type="number" value="1" min="1" max="5" inputmode="numeric" required><button type="button" id="increaseQuantity" aria-label="Increase Quantity">+</button></div>
               </div>
@@ -252,7 +252,7 @@ h1 span{color:#8e3943}
     if (!state.catalog) return;
     var variant = selectedVariant(); var ship = selectedShipping(); var qty = quantity();
     var subtotal = variant && qty ? variant.price_minor * qty : null;
-    setText('summaryName', state.catalog.product.name); setText('summaryVariant', variant ? variant.color_label + ' / ' + variant.size + ' / Quantity: ' + (qty || '—') : 'Select لونًا وSizeًا Availableين');
+    setText('summaryName', state.catalog.product.name); setText('summaryVariant', variant ? variant.color_label + ' / ' + variant.size + ' / Quantity: ' + (qty || '—') : 'Select an available color and size');
     setText('selectionStatus', variantAvailable(variant) ? 'Price per piece: ' + money(variant.price_minor) : 'This option is currently unavailable.');
     setText('subtotal', subtotal == null ? '—' : money(subtotal)); setText('shippingFee', ship ? money(ship.fee_minor) : 'Select Governorate'); setText('total', subtotal != null && ship ? money(subtotal + ship.fee_minor) : '—');
     var delivery = ship ? String(ship.delivery_days) : 'Shown after selecting your governorate';
@@ -361,7 +361,7 @@ h1 span{color:#8e3943}
         setStatus(error.message || 'Review order details and retry.', true);
         if (error.code === 'CHECKOUT_EXPIRED') return loadCatalog();
       } else {
-        setStatus((error.code === 'IDEMPOTENCY_CONFLICT' ? 'هذا المفتاح مرتبط بOrder ببيانات مختلفة. تأكد من الOrder السابق قبل بدء New order.' : 'We couldn't verify whether the order was submitted. It may have been saved. Retry the same order to prevent duplicates..') + '\nCheck the current order before placing another.', true);
+        setStatus((error.code === 'IDEMPOTENCY_CONFLICT' ? 'This request key belongs to an order with different details. Check the previous order before starting New order.' : 'We couldn't verify whether the order was submitted. It may have been saved. Retry the same order to prevent duplicates..') + '\nCheck the current order before placing another.', true);
         $('retryActions').hidden = false; $('retryOrder').hidden = error.code === 'IDEMPOTENCY_CONFLICT';
       }
     }).finally(function () {
