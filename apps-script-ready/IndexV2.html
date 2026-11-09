@@ -85,10 +85,10 @@ h1 span{color:#8e3943}
   <main>
     <section class="hero shell" aria-labelledby="heroTitle">
       <div class="hero-copy">
-        <span class="eyebrow"><span class="tiny-line"></span> THE FIRST EDITION / 2026</span>
+        <span class="eyebrow" id="heroKicker"><span class="tiny-line"></span> THE FIRST EDITION / 2026</span>
         <h1 id="heroTitle">The New<br><span>Collection.</span></h1>
         <p id="brandDescription">An introduction to everyday essentials. Considered silhouettes. Uncomplicated style.</p>
-        <a href="#order" class="button primary">Explore the drop <span aria-hidden="true">↙</span></a>
+        <a href="#product" class="button primary"><span id="heroButtonText">Explore the drop</span> <span aria-hidden="true">↙</span></a>
         <div class="hero-note"><span aria-hidden="true">◷</span><span>This collection is available for pre-order</span></div>
       </div>
       <div class="hero-art" aria-labelledby="illustrationCaption"><div class="hero-photo" id="heroPhoto" aria-hidden="true"></div>
@@ -164,7 +164,7 @@ h1 span{color:#8e3943}
     <section id="size-guide" class="size-section shell" aria-labelledby="sizeTitle"><div><span class="eyebrow">03 — Size </span><h2 id="sizeTitle">The size guide.</h2><p class="muted" id="guideNote">Sample measurements only. Confirm real measurements before launch.</p></div><div class="table-scroll"><table><caption class="sr-only">Size guide in centimeters</caption><thead><tr><th scope="col">Size</th><th scope="col">Chest (cm)</th><th scope="col">Length (cm)</th><th scope="col">Sleeve (cm)</th><th scope="col">Notes</th></tr></thead><tbody id="sizeGuideBody"></tbody></table></div></section>
     <section id="policies" class="policies-section shell" aria-labelledby="policiesTitle"><span class="eyebrow">04 — Details matter</span><h2 id="policiesTitle">Before you order.</h2><div class="policy-grid"><details><summary>Shipping & delivery <span aria-hidden="true">+</span></summary><p id="shippingPolicy">Policy Shipping To be confirmed.</p></details><details><summary>Exchanges <span aria-hidden="true">+</span></summary><p id="exchangePolicy">Policy Exchanges To be confirmed.</p></details><details><summary>Returns <span aria-hidden="true">+</span></summary><p id="returnPolicy">Policy Returns To be confirmed.</p></details></div><div class="contact-row"><span>Any questions?</span><div id="contactLinks"><span class="muted">Contact details coming soon.</span></div></div></section>
   </main>
-  <footer class="site-footer"><div class="shell"><a href="#" class="brand" id="footerBrand">BRAND NAME</a><span>A new point of view.</span><a href="#order">Shop now ↖</a></div></footer>
+  <footer class="site-footer"><div class="shell"><a href="#" class="brand" id="footerBrand">BRAND NAME</a><span id="footerNote">A new point of view.</span><a href="#order">Shop now ↖</a></div></footer>
   <script>
 (function () {
   'use strict';
@@ -265,7 +265,7 @@ h1 span{color:#8e3943}
     catalog.product = catalog.product || { id: '', name: 'Product setup in progress', description: 'Product details are not complete yet.', material: '', fit: '', images: [], is_demo: true };
     catalog.variants = catalog.variants || []; catalog.shipping = catalog.shipping || []; catalog.sizeGuide = catalog.sizeGuide || [];
     catalog.readiness = catalog.readiness || { ready: false, issues: [] };
-    state.catalog = catalog;
+    state.catalog = catalog; window.dispatchEvent(new CustomEvent('store:appearance',{detail:catalog.appearance||{}}));
     var maxQuantity = Number(catalog.checkout && catalog.checkout.max_order_qty);
     $('quantity').max = String(Number.isInteger(maxQuantity) && maxQuantity > 0 ? maxQuantity : 5);
     if (quantity() > Number($('quantity').max)) $('quantity').value = $('quantity').max;
@@ -400,7 +400,7 @@ h1 span{color:#8e3943}
     var frame=photo&&photo.parentElement;
     function syncHero(){
       var img=document.querySelector('#productGallery img');
-      if(img&&img.src&&photo&&frame){photo.style.backgroundImage='url("'+img.src.replace(/"/g,'%22')+'")';frame.classList.add('has-photo');}
+      if(img&&img.src&&photo&&frame&&!frame.dataset.editorHero){photo.style.backgroundImage='url("'+img.src.replace(/"/g,'%22')+'")';frame.classList.add('has-photo');}
     }
     if(window.MutationObserver&&document.getElementById('productGallery')){
       new MutationObserver(syncHero).observe(document.getElementById('productGallery'),{childList:true,subtree:true});
@@ -418,5 +418,52 @@ h1 span{color:#8e3943}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initEditorial);else initEditorial();
 })();
 </script>
+
+<script>
+(function(){
+  function applyAppearance(a){
+    a=a||{};
+    var get=function(id){return document.getElementById(id)};
+    var put=function(id,value){if(get(id)&&typeof value==='string'&&value.trim())get(id).textContent=value};
+    put('heroTitle',a.hero_title);put('heroKicker',a.hero_kicker);
+    put('heroButtonText',a.hero_button);put('sectionLabel',a.section_label);put('footerNote',a.footer_note);
+    if(a.announcement_text&&get('modeBanner')&&!(window.__storeDemoBanner)){
+      // Demo safety notices are never hidden or replaced.
+      if(!/demo mode|real orders are disabled/i.test(get('modeBanner').textContent||''))put('modeBanner',a.announcement_text);
+    }
+    var themes={editorial:['#d98b32','#f7eeeb','#632333'],minimal:['#e0e0dc','#fafaf8','#252525'],dark:['#25211f','#22201f','#f2e7da']};
+    var scheme=themes[a.theme]||themes.editorial,css=document.documentElement.style;
+    css.setProperty('--editorial-frame',scheme[0]);css.setProperty('--editorial-paper',scheme[1]);css.setProperty('--editorial-ink',scheme[2]);
+    document.body.classList.toggle('theme-dark',a.theme==='dark');
+    var photo=get('heroPhoto'),frame=photo&&photo.parentElement;
+    if(photo&&frame&&a.hero_image_url&&/^https:\/\//i.test(a.hero_image_url)){
+      photo.style.backgroundImage='url("'+a.hero_image_url.replace(/["\\()]/g,encodeURIComponent)+'")';
+      frame.classList.add('has-photo');frame.dataset.editorHero='true';
+    }
+    if(a.scroll_animation==='off')document.documentElement.classList.add('animation-off');
+    if(a.scroll_animation==='parallax'&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      var ticking=false, move=function(){
+        ticking=false;
+        var el=get('heroPhoto');if(!el)return;
+        var rect=el.getBoundingClientRect();
+        if(rect.bottom>=0&&rect.top<=innerHeight){el.style.transform='translateY('+Math.max(-25,Math.min(25,(innerHeight/2-rect.top)*.04))+'px) scale(1.08)';}
+      };
+      addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(move)}},{passive:true});move();
+    }
+  }
+  window.addEventListener('store:appearance',function(e){applyAppearance(e.detail)});
+})();
+</script>
+<style>
+body{background:var(--editorial-frame,#d98b32)}
+body>main,body>.site-header,body>.site-footer{background:var(--editorial-paper,#f7eeeb)}
+body.theme-dark{color:var(--editorial-ink);--ink:#f2e7da;--muted:#b9a9a1;--line:#514740}
+body.theme-dark .form-card,body.theme-dark .success-panel{background:#2e2926;color:#f2e7da}
+body.theme-dark .field input,body.theme-dark .field select,body.theme-dark .field textarea{background:#36302d;color:white;border-color:#75625b}
+body.theme-dark .brand,body.theme-dark .hero h1,body.theme-dark .hero h1 span,body.theme-dark .site-header nav,body.theme-dark .header-cta{color:#f2e7da}
+.animation-off .reveal-ready{opacity:1!important;transform:none!important;transition:none!important}
+.animation-off .hero-art svg{animation:none!important}
+</style>
+
 </body>
 </html>
