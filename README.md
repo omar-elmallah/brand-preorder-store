@@ -6,6 +6,10 @@
 
 لم تُقرأ أو تُنسخ أي ملفات أو شيتات أو مفاتيح أو عمليات نشر من NAGY STUDIO. أنشئ مشروع Apps Script جديدًا لهذا المتجر؛ لا تلصق الملفات داخل مشروع سابق ولا تضع معرف شيت سابق في الإعدادات.
 
+## ملف Excel الجاهز
+
+[تحميل ملف تجهيز المتجر Excel](https://github.com/omar-elmallah/brand-preorder-store/raw/refs/heads/main/templates/brand-store-template.xlsx). يحتوي الجداول الثمانية، ودليلًا عربيًا وقائمة تجهيز، مع بيانات تجريبية فقط. راجع [دليل Excel ونقل القيم](docs/EXCEL_GUIDE.md)؛ الربط التشغيلي يظل عبر الشيت المستقل الذي ينشئه `setupStore()`، وليس باستبدال معرفه بملف Excel محوّل.
+
 ## أسرع تشغيل على Google
 
 1. افتح [script.google.com](https://script.google.com/) وأنشئ **مشروعًا مستقلًا جديدًا**. انسخ كل ملفات `src/*.gs` و`src/*.html` بأسمائها؛ ملفات HTML تكون من النوع HTML، وملفات `.gs` من النوع Script. من إعدادات المشروع فعّل إظهار ملف البيان، ثم استبدل `appsscript.json` بالملف المرفق.
