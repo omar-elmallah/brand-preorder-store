@@ -780,9 +780,11 @@ function doGet(e) {
 
 /** Website Appearance Editor. Keys are isolated from commerce & launch settings. */
 var APPEARANCE_DEFAULTS_ = Object.freeze({
-  hero_title:'The New Collection.', hero_kicker:'THE FIRST EDITION / 2026',
-  hero_button:'Explore the drop', hero_image_url:'', editorial_image_url:'',
-  theme:'editorial', scroll_animation:'reveal', announcement_text:'',
+  hero_title:'GENRAGE', hero_kicker:'NEW ARRIVALS / 2026',
+  hero_description:'Born in the streets. GENRAGE delivers elevated essentials for a modern generation — premium streetwear with a bold, timeless edge.',
+  hero_word:'GENRAGE', thumbnail_image_url:'',
+  hero_button:'Shop now', hero_image_url:'', editorial_image_url:'',
+  theme:'minimal', scroll_animation:'reveal', announcement_text:'',
   section_label:'01 — THE EDIT', footer_note:'A new point of view.'
 });
 function appearance_(){
