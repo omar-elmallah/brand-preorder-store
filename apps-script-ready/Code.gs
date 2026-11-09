@@ -780,10 +780,10 @@ function doGet(e) {
 
 /** Website Appearance Editor. Keys are isolated from commerce & launch settings. */
 var APPEARANCE_DEFAULTS_ = Object.freeze({
-  hero_title:'The New Collection.', hero_kicker:'THE FIRST EDITION / 2026',
-  hero_button:'Explore the drop', hero_image_url:'', editorial_image_url:'',
-  theme:'editorial', scroll_animation:'reveal', announcement_text:'',
-  section_label:'01 — THE EDIT', footer_note:'A new point of view.'
+  hero_title:'THE NEW DROP.', hero_kicker:'THE FIRST EDITION / 2026',
+  hero_button:'SHOP THE DROP', hero_image_url:'', editorial_image_url:'',
+  theme:'minimal', scroll_animation:'reveal', announcement_text:'',
+  section_label:'THE COLLECTION / 001', footer_note:'Made to be worn.'
 });
 function appearance_(){
   var saved=settings_(), out={};
