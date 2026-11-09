@@ -192,7 +192,7 @@ h1 span{color:#8e3943}
       operation = window.StoreTransport.request(name, payload);
     } else if (window.google && google.script && google.script.run) {
       operation = new Promise(function (resolve, reject) {
-        var runner = google.script.run.withSuccessHandler(resolve).withFailureHandler(function () { reject({ code: 'TRANSPORT', message: 'Couldn't verify the submission. Retry the same order..' }); });
+        var runner = google.script.run.withSuccessHandler(resolve).withFailureHandler(function () { reject({ code: 'TRANSPORT', message: 'Could not verify the submission. Retry the same order..' }); });
         if (payload === undefined) runner[name](); else runner[name](payload);
       });
     } else {
@@ -310,10 +310,10 @@ h1 span{color:#8e3943}
     return api('getCatalog').then(function (catalog) {
       renderCatalog(catalog); emit('view_item', { item_id: catalog.product.id });
       if (storageGet('brand-store:pending') && !state.pending && !state.lastReceipt) {
-        setStatus('A previous submission couldn't be verified. Retrying with the same details prevents duplicates. Check the previous order before starting a different one..', false);
+        setStatus('A previous submission could not be verified. Retrying with the same details prevents duplicates. Check the previous order before starting a different one..', false);
         $('retryActions').hidden = false; $('retryOrder').hidden = true;
       }
-    }).catch(function (error) { $('loadError').hidden = false; setText('loadErrorText', error.message || 'Couldn't load the store. Please try again..'); setText('modeBanner', 'Couldn't load the store'); $('orderFields').disabled = true; }).finally(function () { $('reloadCatalog').disabled = false; });
+    }).catch(function (error) { $('loadError').hidden = false; setText('loadErrorText', error.message || 'Could not load the store. Please try again..'); setText('modeBanner', 'Could not load the store'); $('orderFields').disabled = true; }).finally(function () { $('reloadCatalog').disabled = false; });
   }
   function beginCheckout() {
     if (state.checkoutStarted || !state.catalog) return; state.checkoutStarted = true;
@@ -361,7 +361,7 @@ h1 span{color:#8e3943}
         setStatus(error.message || 'Review order details and retry.', true);
         if (error.code === 'CHECKOUT_EXPIRED') return loadCatalog();
       } else {
-        setStatus((error.code === 'IDEMPOTENCY_CONFLICT' ? 'This request key belongs to an order with different details. Check the previous order before starting New order.' : 'We couldn't verify whether the order was submitted. It may have been saved. Retry the same order to prevent duplicates..') + '\nCheck the current order before placing another.', true);
+        setStatus((error.code === 'IDEMPOTENCY_CONFLICT' ? 'This request key belongs to an order with different details. Check the previous order before starting New order.' : 'We could not verify whether the order was submitted. It may have been saved. Retry the same order to prevent duplicates..') + '\nCheck the current order before placing another.', true);
         $('retryActions').hidden = false; $('retryOrder').hidden = error.code === 'IDEMPOTENCY_CONFLICT';
       }
     }).finally(function () {
